@@ -1,0 +1,201 @@
+
+/* minimalist_toolbox/frontend/css/tools.css */
+.tool-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.tool-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.tool-title {
+    font-size: 2rem;
+    font-weight: 700;
+    background: linear-gradient(45deg, var(--primary), var(--secondary));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.tool-description {
+    color: var(--text);
+    opacity: 0.7;
+    margin-top: 0.5rem;
+}
+
+.tool-card {
+    background-color: var(--card);
+    border-radius: 1rem;
+    padding: 2rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    margin-bottom: 2rem;
+}
+
+.tool-section-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: var(--text);
+}
+
+.tool-button {
+    padding: 0.75rem 1.5rem;
+    background-color: var(--primary);
+    color: white;
+    border-radius: 0.5rem;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    border: none;
+    cursor: pointer;
+}
+
+.tool-button:hover {
+    background-color: var(--secondary);
+    transform: translateY(-1px);
+}
+
+.tool-button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.tool-input {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border-radius: 0.5rem;
+    border: 1px solid var(--hover);
+    background-color: var(--card);
+    color: var(--text);
+    font-size: 1rem;
+}
+
+.tool-input:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.2);
+}
+
+.tool-checkbox {
+    width: 1.25rem;
+    height: 1.25rem;
+    border-radius: 0.25rem;
+    border: 1px solid var(--hover);
+    background-color: var(--card);
+    appearance: none;
+    cursor: pointer;
+    position: relative;
+}
+
+.tool-checkbox:checked {
+    background-color: var(--primary);
+    border-color: var(--primary);
+}
+
+.tool-checkbox:checked::after {
+    content: "✓";
+    position: absolute;
+    color: white;
+    font-size: 0.875rem;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.tool-slider {
+    width: 100%;
+    height: 0.5rem;
+    border-radius: 0.25rem;
+    background-color: var(--hover);
+    appearance: none;
+    outline: none;
+}
+
+.tool-slider::-webkit-slider-thumb {
+    appearance: none;
+    width: 1.25rem;
+    height: 1.25rem;
+    border-radius: 50%;
+    background: var(--primary);
+    cursor: pointer;
+}
+
+.tool-slider::-moz-range-thumb {
+    width: 1.25rem;
+    height: 1.25rem;
+    border-radius: 50%;
+    background: var(--primary);
+    cursor: pointer;
+}
+
+.tool-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.tool-table th, .tool-table td {
+    padding: 0.75rem 1rem;
+    text-align: left;
+    border-bottom: 1px solid var(--hover);
+}
+
+.tool-table th {
+    font-weight: 600;
+    color: var(--text);
+}
+
+.tool-table tr:last-child td {
+    border-bottom: none;
+}
+
+.tool-alert {
+    padding: 1rem;
+    border-radius: 0.5rem;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+}
+
+.tool-alert-success {
+    background-color: rgba(16, 185, 129, 0.1);
+    color: #10b981;
+}
+
+.tool-alert-info {
+    background-color: rgba(59, 130, 246, 0.1);
+    color: #3b82f6;
+}
+
+.tool-alert-warning {
+    background-color: rgba(245, 158, 11, 0.1);
+    color: #f59e0b;
+}
+
+.tool-alert-error {
+    background-color: rgba(239, 68, 68, 0.1);
+    color: #ef4444;
+}
+
+.tool-icon {
+    margin-right: 0.75rem;
+    font-size: 1.25rem;
+}
+
+@media (max-width: 768px) {
+    .tool-container {
+        padding: 1rem;
+    }
+    
+    .tool-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .tool-title {
+        font-size: 1.5rem;
+    }
+}

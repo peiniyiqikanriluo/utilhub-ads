@@ -1,0 +1,955 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Base64在线转换工具 - 文本与Base64编码解码 | 极简工具箱</title>
+    <meta name="description" content="免费在线Base64编码解码工具，支持文本和图片与Base64互相转换。快速、安全、无需下载，保留隐私的本地计算方式。">
+    <meta name="keywords" content="Base64, Base64编码, Base64解码, 在线工具, 文本转换, 编码工具, 解码工具">
+    <meta name="author" content="极简工具箱">
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link href="https://fonts.loli.net/css?family=Noto+Sans+SC:400,500,700&display=swap" rel="stylesheet">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6400988749068679"
+     crossorigin="anonymous"></script>
+    <style>
+        :root {
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --secondary: #8b5cf6;
+            --dark-bg: #1f2937;
+            --dark-card: #374151;
+            --light-bg: #f9fafb;
+            --text-primary: #333;
+            --text-secondary: #6b7280;
+            --text-muted: #9ca3af;
+            --border-color: #d1d5db;
+            --button-bg-color: #e5e7eb;
+        }
+
+        body {
+            font-family: 'Noto Sans SC', sans-serif;
+            background-color: var(--light-bg);
+            color: var(--text-primary);
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        body.dark {
+            background-color: var(--dark-bg);
+            color: #e5e7eb;
+            --text-primary: #e5e7eb;
+            --text-secondary: #d1d5db;
+            --text-muted: #9ca3af;
+            --border-color: #4b5563;
+            --button-bg-color: #000;
+        }
+
+        .dark .card {
+            background-color: var(--dark-card);
+            color: #e5e7eb;
+        }
+
+        .card {
+            background-color: white;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .gradient-text {
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: 500;
+            transition: background-color 0.2s;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+        }
+
+        .tab-button {
+            background-color: var(--button-bg-color);
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            color: var(--text-primary);
+        }
+
+        .tab-button.active {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .code-area {
+            font-family: monospace;
+            width: 100%;
+            background-color: #f3f4f6;
+            border: 1px solid var(--border-color);
+            border-radius: 0.5rem;
+            padding: 0.75rem;
+            min-height: 10rem;
+            resize: vertical;
+            color: var(--text-primary);
+        }
+
+        .dark .code-area {
+            background-color: #4b5563;
+            border-color: #6b7280;
+            color: #e5e7eb;
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 8px;
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .toast.show {
+            opacity: 1;
+        }
+
+        .image-preview {
+            max-width: 100%;
+            max-height: 300px;
+            border: 1px dashed var(--border-color);
+            border-radius: 0.5rem;
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #f9fafb;
+        }
+
+        .dark .image-preview {
+            background-color: #374151;
+            border-color: #6b7280;
+        }
+
+        .image-preview img {
+            max-width: 100%;
+            max-height: 280px;
+        }
+
+        .file-upload {
+            border: 2px dashed var(--border-color);
+            border-radius: 0.5rem;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .file-upload:hover {
+            border-color: var(--primary);
+        }
+
+        .file-upload.dragover {
+            border-color: var(--primary);
+            background-color: rgba(79, 70, 229, 0.05);
+        }
+
+        .copy-btn {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.5rem 1rem;
+            background-color: #e5e7eb;
+            border-radius: 0.375rem;
+            transition: all 0.2s;
+            color: var(--text-primary);
+        }
+
+        .dark .copy-btn {
+            background-color: #4b5563;
+            color: #e5e7eb;
+        }
+
+        .copy-btn:hover {
+            background-color: #d1d5db;
+        }
+
+        .dark .copy-btn:hover {
+            background-color: #6b7280;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 4px;
+            background-color: #e5e7eb;
+            border-radius: 2px;
+            overflow: hidden;
+            margin-top: 0.5rem;
+        }
+
+        .progress {
+            height: 100%;
+            background-color: var(--primary);
+            width: 0%;
+            transition: width 0.3s;
+        }
+
+        /* 修复文本颜色问题 */
+        .text-color-primary {
+            color: var(--text-primary);
+        }
+
+        .text-color-secondary {
+            color: var(--text-secondary);
+        }
+
+        .text-color-muted {
+            color: var(--text-muted);
+        }
+
+        .border-color-custom {
+            border-color: var(--border-color);
+        }
+
+        /* 确保所有文本元素都使用CSS变量 */
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6,
+        p,
+        span,
+        div,
+        label,
+        li {
+            color: var(--text-primary);
+        }
+
+        /* 返回首页按钮样式 */
+        .home-btn {
+            display: inline-flex;
+            align-items: center;
+            background-color: #4f46e5;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            font-weight: 500;
+            transition: background-color 0.2s;
+            margin-bottom: 1rem;
+            text-decoration: none;
+        }
+
+        .home-btn:hover {
+            background-color: #5750e1;
+        }
+
+        .dark .home-btn {
+            background-color: #2b21e7;
+        }
+
+        .dark .home-btn:hover {
+            background-color: #1106e3;
+        }
+    </style>
+</head>
+
+<body class="min-h-screen">
+    <div class="container mx-auto px-4 py-8">
+        <!-- 返回首页按钮 -->
+        <div class="mb-4">
+            <a href="./index.html" class="home-btn">
+                <span class="text-xl mr-2">🏠</span>
+                返回首页
+            </a>
+        </div>
+
+        <header class="mb-8">
+            <div class="flex justify-between items-center flex-wrap gap-4">
+                <div>
+                    <h1 class="text-3xl font-bold gradient-text">Base64编码解码工具</h1>
+                    <p class="text-color-secondary mt-2">免费在线Base64转换工具 - 支持文本和图片与Base64编码互转</p>
+                </div>
+
+                <button id="theme-toggle"
+                    class="px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition">
+                    切换主题
+                </button>
+            </div>
+        </header>
+
+        <main id="main-content">
+            <div class="card">
+                <h2 class="sr-only">Base64转换工具</h2>
+                <div class="flex space-x-2 mb-6 overflow-x-auto">
+                    <button class="tab-button active" data-tab="text-to-base64">文本转Base64</button>
+                    <button class="tab-button" data-tab="base64-to-text">Base64转文本</button>
+                    <button class="tab-button" data-tab="image-to-base64">图片转Base64</button>
+                    <button class="tab-button" data-tab="base64-to-image">Base64转图片</button>
+                </div>
+
+                <div id="text-to-base64" class="tab-content">
+                    <div class="mb-6">
+                        <label for="encode-input" class="block text-sm font-medium mb-2">输入文本</label>
+                        <textarea id="encode-input" class="code-area" placeholder="输入要转换的文本"></textarea>
+                    </div>
+                    <div class="mb-6">
+                        <button id="encode-btn" class="btn-primary w-full flex items-center justify-center">
+                            <span class="text-xl mr-2">🔢</span>
+                            转换为Base64
+                        </button>
+                    </div>
+                    <div class="mb-6">
+                        <label for="encode-output" class="block text-sm font-medium mb-2">Base64结果</label>
+                        <textarea id="encode-output" class="code-area" placeholder="Base64编码结果" readonly></textarea>
+                    </div>
+                    <div>
+                        <button id="copy-base64-btn" class="copy-btn">
+                            <span class="text-xl mr-2">📋</span>
+                            复制结果
+                        </button>
+                    </div>
+                </div>
+
+                <div id="base64-to-text" class="tab-content hidden">
+                    <div class="mb-6">
+                        <label for="decode-input" class="block text-sm font-medium mb-2">输入Base64</label>
+                        <textarea id="decode-input" class="code-area" placeholder="输入Base64编码"></textarea>
+                    </div>
+                    <div class="mb-6">
+                        <button id="decode-btn" class="btn-primary w-full flex items-center justify-center">
+                            <span class="text-xl mr-2">🔤</span>
+                            解码为文本
+                        </button>
+                    </div>
+                    <div class="mb-6">
+                        <label for="decode-output" class="block text-sm font-medium mb-2">解码结果</label>
+                        <textarea id="decode-output" class="code-area" placeholder="解码后的文本" readonly></textarea>
+                    </div>
+                    <div>
+                        <button id="copy-text-btn" class="copy-btn">
+                            <span class="text-xl mr-2">📋</span>
+                            复制结果
+                        </button>
+                    </div>
+                </div>
+
+                <div id="image-to-base64" class="tab-content hidden">
+                    <div class="mb-6">
+                        <label for="image-upload" class="block text-sm font-medium mb-2">上传图片</label>
+                        <div id="image-upload" class="file-upload">
+                            <input type="file" id="image-file" accept="image/*" class="hidden">
+                            <div class="flex flex-col items-center justify-center">
+                                <span class="text-4xl mb-2">📁</span>
+                                <p class="text-color-secondary">点击或拖拽图片到这里</p>
+                                <p class="text-sm text-color-muted mt-1">支持JPG, PNG, GIF等格式</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-6">
+                        <label class="block text-sm font-medium mb-2">图片预览</label>
+                        <div id="image-preview" class="image-preview">
+                            <div class="text-color-muted">图片预览区域</div>
+                        </div>
+                    </div>
+                    <div class="mb-6">
+                        <div class="flex items-center justify-between mb-2">
+                            <label class="block text-sm font-medium">转换进度</label>
+                            <span id="progress-text" class="text-color-secondary">0%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div id="progress" class="progress"></div>
+                        </div>
+                    </div>
+                    <div class="mb-6">
+                        <button id="encode-image-btn" class="btn-primary w-full flex items-center justify-center"
+                            disabled>
+                            <span class="text-xl mr-2">🖼️</span>
+                            转换为Base64
+                        </button>
+                    </div>
+                    <div class="mb-6">
+                        <label for="image-base64-output" class="block text-sm font-medium mb-2">Base64结果</label>
+                        <textarea id="image-base64-output" class="code-area" placeholder="Base64编码结果"
+                            readonly></textarea>
+                    </div>
+                    <div class="flex space-x-4">
+                        <button id="copy-image-base64-btn" class="copy-btn flex-1" disabled>
+                            <span class="text-xl mr-2">📋</span>
+                            复制结果
+                        </button>
+                        <button id="save-base64-btn" class="copy-btn flex-1" disabled>
+                            <span class="text-xl mr-2">💾</span>
+                            保存为文件
+                        </button>
+                    </div>
+                </div>
+
+                <div id="base64-to-image" class="tab-content hidden">
+                    <div class="mb-6">
+                        <label for="base64-image-input" class="block text-sm font-medium mb-2">输入Base64编码</label>
+                        <textarea id="base64-image-input" class="code-area" placeholder="输入图片的Base64编码"></textarea>
+                    </div>
+                    <div class="mb-6">
+                        <button id="decode-image-btn" class="btn-primary w-full flex items-center justify-center">
+                            <span class="text-xl mr-2">🔍</span>
+                            解码为图片
+                        </button>
+                    </div>
+                    <div class="mb-6">
+                        <label class="block text-sm font-medium mb-2">图片预览</label>
+                        <div id="decoded-image-preview" class="image-preview">
+                            <div class="text-color-muted">解码后的图片将显示在这里</div>
+                        </div>
+                    </div>
+                    <div>
+                        <button id="download-image-btn" class="copy-btn" disabled>
+                            <span class="text-xl mr-2">💾</span>
+                            下载图片
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2 class="text-xl font-semibold mb-4">Base64转换工具使用指南</h2>
+                <div class="text-sm text-color-secondary space-y-4">
+                    <h3 class="font-medium text-color-primary">如何将文本转换为Base64?</h3>
+                    <ol class="list-decimal pl-5 space-y-2 text-color-secondary">
+                        <li>在"文本转Base64"标签页中，在输入框中输入或粘贴要编码的文本</li>
+                        <li>点击"转换为Base64"按钮</li>
+                        <li>编码后的Base64字符串将显示在结果框中</li>
+                        <li>使用"复制结果"按钮将Base64代码复制到剪贴板</li>
+                    </ol>
+
+                    <h3 class="font-medium text-color-primary">如何将Base64解码为文本?</h3>
+                    <ol class="list-decimal pl-5 space-y-2 text-color-secondary">
+                        <li>在"Base64转文本"标签页中，在输入框中输入或粘贴Base64编码</li>
+                        <li>点击"解码为文本"按钮</li>
+                        <li>解码后的原始文本将显示在结果框中</li>
+                        <li>使用"复制结果"按钮将文本复制到剪贴板</li>
+                    </ol>
+
+                    <h3 class="font-medium text-color-primary">如何将图片转换为Base64?</h3>
+                    <ol class="list-decimal pl-5 space-y-2 text-color-secondary">
+                        <li>在"图片转Base64"标签页中，点击或拖拽图片到上传区域</li>
+                        <li>预览确认上传的图片</li>
+                        <li>点击"转换为Base64"按钮</li>
+                        <li>编码后的Base64字符串将显示在结果框中</li>
+                        <li>使用"复制结果"按钮将Base64代码复制到剪贴板</li>
+                    </ol>
+
+                    <h3 class="font-medium text-color-primary">如何将Base64解码为图片?</h3>
+                    <ol class="list-decimal pl-5 space-y-2 text-color-secondary">
+                        <li>在"Base64转图片"标签页中，在输入框中输入或粘贴Base64编码</li>
+                        <li>点击"解码为图片"按钮</li>
+                        <li>解码后的图片将显示在预览区域</li>
+                        <li>使用"下载图片"按钮将图片保存到本地</li>
+                    </ol>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2 class="text-xl font-semibold mb-4">关于Base64编码</h2>
+                <div class="text-sm text-color-secondary space-y-4">
+                    <p class="text-color-primary">
+                        Base64是一种基于64个可打印字符来表示二进制数据的编码方式。它使用A-Z、a-z、0-9共62个字符，以及两个附加字符（通常是+和/）共64个字符。</p>
+
+                    <h3 class="font-medium text-color-primary">Base64的应用场景：</h3>
+                    <ul class="list-disc pl-5 space-y-2 text-color-secondary">
+                        <li>在XML、JSON等文本协议中嵌入二进制数据</li>
+                        <li>在HTTP环境下传输较长的标识信息</li>
+                        <li>电子邮件系统中传输二进制文件附件</li>
+                        <li>数据URL方案，如网页中嵌入图片</li>
+                        <li>存储复杂数据在cookie中</li>
+                    </ul>
+
+                    <h3 class="font-medium text-color-primary">Base64编码特点：</h3>
+                    <ul class="list-disc pl-5 space-y-2 text-color-secondary">
+                        <li>编码后的数据比原始数据大约33%</li>
+                        <li>只包含可打印ASCII字符，避免传输中的编码问题</li>
+                        <li>不是加密算法，不提供安全性</li>
+                        <li>编码解码过程简单高效</li>
+                    </ul>
+
+                    <p class="pt-4 border-t border-color-custom text-color-primary"><strong>隐私提示：</strong>
+                        我们的Base64转换工具完全在浏览器中运行，您的数据不会发送到任何服务器，保证了您的数据隐私和安全。</p>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <div id="toast" class="toast">已复制到剪贴板</div>
+
+    <footer class="mt-12 py-6 text-center text-sm text-color-secondary">
+        <p>© 2025 极简工具箱. 所有权利保留.</p>
+    </footer>
+
+    <script>
+        class Base64Converter {
+            constructor() {
+                this.currentImageFile = null;
+                this.initEventListeners();
+                this.initTheme();
+            }
+
+            initEventListeners() {
+                // 文本转Base64
+                document.getElementById('encode-btn').addEventListener('click', () => {
+                    this.encodeText();
+                });
+
+                // Base64转文本
+                document.getElementById('decode-btn').addEventListener('click', () => {
+                    this.decodeText();
+                });
+
+                // 复制按钮
+                document.getElementById('copy-base64-btn').addEventListener('click', () => {
+                    this.copyToClipboard('encode-output');
+                });
+
+                document.getElementById('copy-text-btn').addEventListener('click', () => {
+                    this.copyToClipboard('decode-output');
+                });
+
+                // Tab切换
+                document.querySelectorAll('.tab-button').forEach(button => {
+                    button.addEventListener('click', () => {
+                        const tabId = button.getAttribute('data-tab');
+                        this.switchTab(tabId);
+                    });
+                });
+
+                // 输入框变化时自动转换
+                document.getElementById('encode-input').addEventListener('input', () => {
+                    this.autoEncode();
+                });
+
+                document.getElementById('decode-input').addEventListener('input', () => {
+                    this.autoDecode();
+                });
+
+                // 图片上传处理
+                const fileInput = document.getElementById('image-file');
+                const uploadArea = document.getElementById('image-upload');
+
+                uploadArea.addEventListener('click', () => {
+                    fileInput.click();
+                });
+
+                fileInput.addEventListener('change', (e) => {
+                    this.handleImageUpload(e.target.files);
+                });
+
+                // 拖拽上传
+                uploadArea.addEventListener('dragover', (e) => {
+                    e.preventDefault();
+                    uploadArea.classList.add('dragover');
+                });
+
+                uploadArea.addEventListener('dragleave', () => {
+                    uploadArea.classList.remove('dragover');
+                });
+
+                uploadArea.addEventListener('drop', (e) => {
+                    e.preventDefault();
+                    uploadArea.classList.remove('dragover');
+                    if (e.dataTransfer.files.length) {
+                        this.handleImageUpload(e.dataTransfer.files);
+                    }
+                });
+
+                // 图片转Base64
+                document.getElementById('encode-image-btn').addEventListener('click', () => {
+                    this.encodeImage();
+                });
+
+                // 复制图片Base64
+                document.getElementById('copy-image-base64-btn').addEventListener('click', () => {
+                    this.copyToClipboard('image-base64-output');
+                });
+
+                // 保存Base64为文件
+                document.getElementById('save-base64-btn').addEventListener('click', () => {
+                    this.saveBase64ToFile();
+                });
+
+                // Base64转图片
+                document.getElementById('decode-image-btn').addEventListener('click', () => {
+                    this.decodeImage();
+                });
+
+                // 下载图片
+                document.getElementById('download-image-btn').addEventListener('click', () => {
+                    this.downloadImage();
+                });
+
+                // 主题切换
+                document.getElementById('theme-toggle').addEventListener('click', () => {
+                    this.toggleTheme();
+                });
+            }
+
+            initTheme() {
+                if (localStorage.getItem('theme') === 'dark' ||
+                    (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                    document.body.classList.add('dark');
+                    this.updateThemeButtonText();
+                }
+            }
+
+            toggleTheme() {
+                document.body.classList.toggle('dark');
+                localStorage.setItem('theme', document.body.classList.contains('dark') ? 'dark' : 'light');
+                this.updateThemeButtonText();
+            }
+
+            updateThemeButtonText() {
+                const themeButton = document.getElementById('theme-toggle');
+                if (document.body.classList.contains('dark')) {
+                    themeButton.textContent = '切换至亮色模式';
+                } else {
+                    themeButton.textContent = '切换至暗色模式';
+                }
+            }
+
+            encodeText() {
+                const text = document.getElementById('encode-input').value;
+                if (!text) {
+                    this.showError('请输入要编码的文本');
+                    return;
+                }
+
+                try {
+                    // 处理Unicode字符
+                    const utf8Text = unescape(encodeURIComponent(text));
+                    const base64 = btoa(utf8Text);
+                    document.getElementById('encode-output').value = base64;
+                } catch (e) {
+                    document.getElementById('encode-output').value = '编码失败: 输入包含非ASCII字符';
+                }
+            }
+
+            decodeText() {
+                const base64 = document.getElementById('decode-input').value.trim();
+                if (!base64) {
+                    this.showError('请输入Base64编码');
+                    return;
+                }
+
+                // 移除可能的数据URI前缀
+                const cleanBase64 = base64.replace(/^data:[^;]+;base64,/, '');
+
+                try {
+                    // 处理Unicode字符
+                    const utf8Text = atob(cleanBase64);
+                    const text = decodeURIComponent(escape(utf8Text));
+                    document.getElementById('decode-output').value = text;
+                } catch (e) {
+                    document.getElementById('decode-output').value = '解码失败: 无效的Base64编码';
+                }
+            }
+
+            autoEncode() {
+                const text = document.getElementById('encode-input').value;
+                if (!text) {
+                    document.getElementById('encode-output').value = '';
+                    return;
+                }
+
+                try {
+                    const utf8Text = unescape(encodeURIComponent(text));
+                    const base64 = btoa(utf8Text);
+                    document.getElementById('encode-output').value = base64;
+                } catch (e) {
+                    // 输入过程中可能产生无效字符，不显示错误
+                }
+            }
+
+            autoDecode() {
+                const base64 = document.getElementById('decode-input').value.trim();
+                if (!base64) {
+                    document.getElementById('decode-output').value = '';
+                    return;
+                }
+
+                const cleanBase64 = base64.replace(/^data:[^;]+;base64,/, '');
+
+                try {
+                    const utf8Text = atob(cleanBase64);
+                    const text = decodeURIComponent(escape(utf8Text));
+                    document.getElementById('decode-output').value = text;
+                } catch (e) {
+                    // 输入过程中可能产生无效Base64，不显示错误
+                }
+            }
+
+            handleImageUpload(files) {
+                if (!files || !files.length) return;
+
+                const file = files[0];
+                if (!file.type.match('image.*')) {
+                    this.showError('请选择图片文件');
+                    return;
+                }
+
+                this.currentImageFile = file;
+
+                // 显示预览
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    const preview = document.getElementById('image-preview');
+                    preview.innerHTML = `<img src="${e.target.result}" alt="图片预览">`;
+
+                    // 启用转换按钮
+                    document.getElementById('encode-image-btn').disabled = false;
+                };
+                reader.readAsDataURL(file);
+            }
+
+            encodeImage() {
+                if (!this.currentImageFile) {
+                    this.showError('请先上传图片');
+                    return;
+                }
+
+                const reader = new FileReader();
+
+                // 显示进度
+                const progressBar = document.getElementById('progress');
+                const progressText = document.getElementById('progress-text');
+
+                // 模拟进度更新（实际FileReader API不提供进度事件）
+                let progress = 0;
+                const progressInterval = setInterval(() => {
+                    if (progress < 90) {
+                        progress += 10;
+                        progressBar.style.width = `${progress}%`;
+                        progressText.textContent = `${progress}%`;
+                    }
+                }, 100);
+
+                reader.onload = (e) => {
+                    clearInterval(progressInterval);
+                    progressBar.style.width = '100%';
+                    progressText.textContent = '100%';
+
+                    setTimeout(() => {
+                        const base64 = e.target.result;
+                        document.getElementById('image-base64-output').value = base64;
+
+                        // 启用复制和保存按钮
+                        document.getElementById('copy-image-base64-btn').disabled = false;
+                        document.getElementById('save-base64-btn').disabled = false;
+
+                        // 重置进度
+                        setTimeout(() => {
+                            progressBar.style.width = '0%';
+                            progressText.textContent = '0%';
+                        }, 500);
+                    }, 300);
+                };
+
+                reader.onerror = () => {
+                    clearInterval(progressInterval);
+                    this.showError('图片读取失败');
+                    progressBar.style.width = '0%';
+                    progressText.textContent = '0%';
+                };
+
+                reader.readAsDataURL(this.currentImageFile);
+            }
+
+            decodeImage() {
+                const base64 = document.getElementById('base64-image-input').value.trim();
+                if (!base64) {
+                    this.showError('请输入Base64编码');
+                    return;
+                }
+
+                // 确保Base64字符串包含数据URI前缀
+                let cleanBase64 = base64;
+                if (!cleanBase64.startsWith('data:')) {
+                    cleanBase64 = `data:image/png;base64,${cleanBase64}`;
+                }
+
+                try {
+                    const preview = document.getElementById('decoded-image-preview');
+                    preview.innerHTML = `<img src="${cleanBase64}" alt="解码后的图片">`;
+
+                    // 启用下载按钮
+                    document.getElementById('download-image-btn').disabled = false;
+                } catch (e) {
+                    this.showError('解码失败: 无效的Base64编码');
+                }
+            }
+
+            downloadImage() {
+                const base64 = document.getElementById('base64-image-input').value.trim();
+                if (!base64) {
+                    this.showError('没有可下载的图片');
+                    return;
+                }
+
+                let cleanBase64 = base64;
+                if (!cleanBase64.startsWith('data:')) {
+                    cleanBase64 = `data:image/png;base64,${cleanBase64}`;
+                }
+
+                // 获取文件扩展名
+                const match = cleanBase64.match(/^data:image\/([a-zA-Z+]+);base64,/);
+                const extension = match ? match[1] : 'png';
+
+                // 创建下载链接
+                const link = document.createElement('a');
+                link.href = cleanBase64;
+                link.download = `decoded-image.${extension}`;
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            }
+
+            saveBase64ToFile() {
+                const base64 = document.getElementById('image-base64-output').value;
+                if (!base64) {
+                    this.showError('没有内容可保存');
+                    return;
+                }
+
+                // 创建Blob对象
+                const blob = new Blob([base64], { type: 'text/plain' });
+
+                // 创建下载链接
+                const link = document.createElement('a');
+                link.href = URL.createObjectURL(blob);
+                link.download = 'base64.txt';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+
+                // 释放URL对象
+                setTimeout(() => {
+                    URL.revokeObjectURL(link.href);
+                }, 100);
+            }
+
+            copyToClipboard(elementId) {
+                const element = document.getElementById(elementId);
+                if (!element.value) {
+                    this.showError('没有内容可复制');
+                    return;
+                }
+
+                // 对于超长文本，使用更高效的方法
+                if (element.value.length > 100000) {
+                    this.copyLongText(element.value);
+                    return;
+                }
+
+                element.select();
+                element.setSelectionRange(0, element.value.length); // 对于移动设备
+
+                try {
+                    const successful = document.execCommand('copy');
+                    if (successful) {
+                        this.showToast('已复制到剪贴板');
+                    } else {
+                        this.showError('复制失败');
+                    }
+                } catch (err) {
+                    // 使用现代 Clipboard API
+                    navigator.clipboard.writeText(element.value).then(() => {
+                        this.showToast('已复制到剪贴板');
+                    }).catch(err => {
+                        this.showError('复制失败: ' + err);
+                    });
+                }
+            }
+
+            copyLongText(text) {
+                // 使用现代Clipboard API处理长文本
+                if (navigator.clipboard && window.ClipboardItem) {
+                    const blob = new Blob([text], { type: 'text/plain' });
+                    const data = [new ClipboardItem({ [blob.type]: blob })];
+
+                    navigator.clipboard.write(data).then(() => {
+                        this.showToast('已复制到剪贴板');
+                    }).catch(err => {
+                        this.showError('复制失败: ' + err);
+                    });
+                } else {
+                    // 降级方案：创建临时textarea
+                    const textarea = document.createElement('textarea');
+                    textarea.value = text;
+                    textarea.style.position = 'fixed';
+                    textarea.style.opacity = '0';
+                    document.body.appendChild(textarea);
+                    textarea.select();
+
+                    try {
+                        const successful = document.execCommand('copy');
+                        if (successful) {
+                            this.showToast('已复制到剪贴板');
+                        } else {
+                            this.showError('复制失败');
+                        }
+                    } catch (err) {
+                        this.showError('复制失败: ' + err);
+                    } finally {
+                        document.body.removeChild(textarea);
+                    }
+                }
+            }
+
+            switchTab(tabId) {
+                document.querySelectorAll('.tab-button').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+
+                document.querySelector(`.tab-button[data-tab="${tabId}"]`).classList.add('active');
+
+                document.querySelectorAll('.tab-content').forEach(content => {
+                    content.classList.add('hidden');
+                });
+
+                document.getElementById(tabId).classList.remove('hidden');
+            }
+
+            showToast(message) {
+                const toast = document.getElementById('toast');
+                toast.textContent = message;
+                toast.classList.add('show');
+
+                setTimeout(() => {
+                    toast.classList.remove('show');
+                }, 2000);
+            }
+
+            showError(message) {
+                this.showToast(message);
+            }
+        }
+
+        // Initialize Base64 Converter
+        document.addEventListener('DOMContentLoaded', () => {
+            const base64Converter = new Base64Converter();
+            window.base64Converter = base64Converter;
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+        <meta name="google-adsense-account" content="ca-pub-6400988749068679">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>极简工具箱 - 多功能在线工具集合</title>
+    <meta name="description"
+        content="极简工具箱提供多种实用的在线工具，包括文件转换、密码生成、IP查询、二维码生成、颜色选择、Base64转换、JSON格式化、Markdown编辑、正则测试、单位转换、时间戳转换和URL编码等功能。">
+    <meta name="keywords"
+        content="在线工具,文件转换器,密码生成器,IP工具,二维码生成器,颜色选择器,Base64转换,JSON格式化,Markdown编辑器,正则表达式测试,单位转换器,时间戳转换,URL编码解码">
+    <meta name="author" content="极简工具箱">
+    <meta property="og:title" content="极简工具箱 - 多功能在线工具集合">
+    <meta property="og:description" content="提供多种实用的在线工具，包括文件转换、密码生成、IP查询、二维码生成、颜色选择、Base64转换、JSON格式化等功能。">
+
+    <meta name="twitter:title" content="极简工具箱 - 多功能在线工具集合">
+    <meta name="twitter:description" content="提供多种实用的在线工具，包括文件转换、密码生成、IP查询、二维码生成、颜色选择、Base64转换、JSON格式化等功能。">
+    <link rel="canonical" href="https://utilhub.top/">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6400988749068679"
+     crossorigin="anonymous"></script>
+    <style>
+        :root {
+            --primary: #6366f1;
+            --secondary: #8b5cf6;
+            --bg: #f8fafc;
+            --text: #1e293b;
+            --card: #ffffff;
+            --hover: #e2e8f0;
+        }
+
+        .dark {
+            --primary: #818cf8;
+            --secondary: #a78bfa;
+            --bg: #0f172a;
+            --text: #f8fafc;
+            --card: #1e293b;
+            --hover: #334155;
+        }
+
+        body {
+            font-family: 'Noto Sans SC', sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            transition: all 0.3s ease;
+        }
+
+        .tool-card {
+            background-color: var(--card);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .tool-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        .tool-card-container {
+            position: relative;
+        }
+
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        .gradient-text {
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .user-panel {
+            background-color: var(--card);
+            border-radius: 0.75rem;
+            padding: 1rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .user-avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background-color: var(--primary);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            margin-top: 5rem;
+        }
+
+        .favorite-tool {
+            background-color: var(--card);
+            border-radius: 0.75rem;
+            padding: 1rem;
+            margin-bottom: 0.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .favorite-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            z-index: 10;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .dark .favorite-btn {
+            background: rgba(30, 41, 59, 0.8);
+        }
+    </style>
+</head>
+
+<body class="min-h-screen">
+    <div id="particles-js" class="particles"></div>
+
+    <div class="container mx-auto px-4 py-8">
+        <header class="mb-12">
+            <div class="header-container">
+                <div>
+                    <h1 class="text-4xl font-bold gradient-text">极简工具箱</h1>
+                    <p class="text-gray-600 dark:text-gray-300 mt-2">您的多功能在线工具集合</p>
+                </div>
+
+                <!-- 暗黑模式切换按钮 -->
+                <button id="theme-toggle" class="p-2 rounded-full bg-gray-200 dark:bg-gray-700">
+                    <span id="theme-icon">🌙</span>
+                </button>
+            </div>
+        </header>
+
+        <!-- 工具卡片容器 -->
+        <div id="tools-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-12">
+            <!-- 工具卡片将由JavaScript动态生成 -->
+        </div>
+
+        <div class="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6 mb-8">
+            <h3 class="text-xl font-semibold mb-4">收藏的工具</h3>
+            <div id="favorites-container" class="min-h-16 bg-gray-100 dark:bg-gray-700 rounded-lg p-4">
+                <p class="text-gray-500 dark:text-gray-400">暂无收藏的工具</p>
+            </div>
+        </div>
+
+        <!-- 添加网站内容区域以提升SEO -->
+        <section class="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6 mb-8">
+            <h2 class="text-2xl font-bold mb-4">关于极简工具箱</h2>
+            <p class="text-gray-600 dark:text-gray-300 mb-4">
+                极简工具箱是一个集合了多种实用在线工具的网站，旨在为用户提供简单、高效的工具体验。
+                我们的工具包括文件转换、密码生成、IP查询、二维码生成、颜色选择、Base64转换、JSON格式化等功能。
+            </p>
+            <p class="text-gray-600 dark:text-gray-300">
+                所有工具都可以直接在浏览器中使用，无需下载安装，随时随地满足您的各种需求。
+            </p>
+        </section>
+<footer class="bg-white dark:bg-gray-800 rounded-xl shadow-md p-8 mt-12">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
+        <!-- 网站介绍 -->
+        <div>
+            <h3 class="text-lg font-semibold mb-4 gradient-text">极简工具箱</h3>
+            <p class="text-gray-600 dark:text-gray-300 text-sm mb-4">
+                提供简单高效的在线工具集合，满足您的日常需求。
+            </p>
+        </div>
+
+        <!-- 工具导航 -->
+        <div>
+            <h3 class="text-lg font-semibold mb-4">工具导航</h3>
+            <ul class="space-y-2">
+                <li><a href="file_converter.html" class="text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary text-sm transition-colors">文件转换器</a></li>
+                <li><a href="password_generator.html" class="text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary text-sm transition-colors">密码生成器</a></li>
+                <li><a href="qr_generator.html" class="text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary text-sm transition-colors">二维码生成器</a></li>
+                <li><a href="json_formatter.html" class="text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary text-sm transition-colors">JSON格式化</a></li>
+                <li><a href="#" class="text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary text-sm transition-colors">查看全部工具</a></li>
+            </ul>
+        </div>
+
+        <!-- 支持与帮助 -->
+        <div>
+            <h3 class="text-lg font-semibold mb-4">支持与帮助</h3>
+            <ul class="space-y-2">
+                <li><a href="#" class="text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary text-sm transition-colors">帮助文档</a></li>
+                <li><a href="#" class="text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary text-sm transition-colors">常见问题</a></li>
+                <li><a href="#" class="text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary text-sm transition-colors">意见反馈</a></li>
+            </ul>
+        </div>
+
+        <!-- 关于我们 -->
+        <div>
+            <h3 class="text-lg font-semibold mb-4">关于我们</h3>
+            <ul class="space-y-2">
+                <li><a href="#" class="text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary text-sm transition-colors">关于极简工具箱</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- 底部版权和备案信息 -->
+    <div class="pt-8 border-t border-gray-200 dark:border-gray-700">
+        <div class="flex flex-col md:flex-row justify-between items-center">
+            <div class="mb-4 md:mb-0 text-center md:text-left">
+                <p class="text-gray-500 dark:text-gray-400 text-sm">© 2025 极简工具箱. 保留所有权利.</p>
+            </div>
+            <div class="flex flex-wrap justify-center gap-6 mb-4 md:mb-0">
+                <a href="#" class="text-gray-500 dark:text-gray-400 hover:text-primary dark:hover:text-primary text-sm transition-colors">隐私政策</a>
+                <a href="#" class="text-gray-500 dark:text-gray-400 hover:text-primary dark:hover:text-primary text-sm transition-colors">服务条款</a>
+            </div>
+            <div class="text-center md:text-right">
+                <p class="text-gray-500 dark:text-gray-400 text-sm">湘ICP备2025138895号</p>
+            </div>
+        </div>
+    </div>
+</footer>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
+    <script>
+        // 工具数据
+        const toolsData = [
+            {
+                name: "文件转换器",
+                icon: "📁",
+                description: "支持多种文件格式转换",
+                link: "file_converter.html",
+                toolId: "file-converter"
+            },
+            {
+                name: "密码生成器",
+                icon: "🔑",
+                description: "生成高强度随机密码",
+                link: "password_generator.html",
+                toolId: "password-generator"
+            },
+            {
+                name: "IP工具",
+                icon: "🌐",
+                description: "查询IP信息",
+                link: "ip_tool.html",
+                toolId: "ip-tool"
+            },
+            {
+                name: "二维码生成器",
+                icon: "🔲",
+                description: "生成自定义二维码",
+                link: "qr_generator.html",
+                toolId: "qr-generator"
+            },
+            {
+                name: "颜色选择器",
+                icon: "🎨",
+                description: "获取和转换颜色值",
+                link: "color_picker.html",
+                toolId: "color-picker"
+            },
+            {
+                name: "Base64转换",
+                icon: "🔢",
+                description: "文本与Base64互转",
+                link: "base64_converter.html",
+                toolId: "base64-converter"
+            },
+            {
+                name: "JSON格式化",
+                icon: "{}",
+                description: "美化和验证JSON",
+                link: "json_formatter.html",
+                toolId: "json-formatter"
+            },
+            {
+                name: "Markdown编辑器",
+                icon: "📝",
+                description: "实时预览Markdown",
+                link: "markdown_editor.html",
+                toolId: "markdown-editor"
+            },
+            {
+                name: "正则表达式测试",
+                icon: ".*",
+                description: "测试和调试正则",
+                link: "regex_tester.html",
+                toolId: "regex-tester"
+            },
+            {
+                name: "单位转换器",
+                icon: "📏",
+                description: "各种单位间的转换",
+                link: "unit_converter.html",
+                toolId: "unit-converter"
+            },
+            {
+                name: "时间戳转换",
+                icon: "⏱️",
+                description: "时间戳与日期互转",
+                link: "timestamp_converter.html",
+                toolId: "timestamp-converter"
+            },
+            {
+                name: "URL编码/解码",
+                icon: "🔗",
+                description: "URL编码转换工具",
+                link: "url_encoder.html",
+                toolId: "url-encoder"
+            }
+        ];
+
+        document.addEventListener('DOMContentLoaded', function () {
+            // 暗黑模式切换
+            const themeToggle = document.getElementById('theme-toggle');
+            const themeIcon = document.getElementById('theme-icon');
+
+            function applyTheme() {
+                if (localStorage.getItem('theme') === 'dark' ||
+                    (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                    document.documentElement.classList.add('dark');
+                    if (themeIcon) themeIcon.textContent = '☀️';
+                } else {
+                    document.documentElement.classList.remove('dark');
+                    if (themeIcon) themeIcon.textContent = '🌙';
+                }
+            }
+
+            if (themeToggle) {
+                themeToggle.addEventListener('click', function () {
+                    document.documentElement.classList.toggle('dark');
+                    localStorage.setItem('theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light');
+                    if (themeIcon) themeIcon.textContent = document.documentElement.classList.contains('dark') ? '☀️' : '🌙';
+                });
+            }
+
+            // 生成工具卡片
+            function renderTools() {
+                const toolsContainer = document.getElementById('tools-container');
+                if (!toolsContainer) return;
+
+                toolsContainer.innerHTML = '';
+
+                toolsData.forEach(tool => {
+                    const usage = localStorage.getItem(`usage_${tool.toolId}`) || 0;
+
+                    const toolContainer = document.createElement('div');
+                    toolContainer.className = 'tool-card-container';
+
+                    const toolCard = document.createElement('a');
+                    toolCard.href = tool.link;
+                    toolCard.className = 'tool-card block rounded-xl p-6 shadow-md cursor-pointer';
+                    toolCard.setAttribute('data-tool', tool.toolId);
+
+                    toolCard.innerHTML = `
+                        <div class="flex items-center mb-4">
+                            <span class="text-3xl mr-3">${tool.icon}</span>
+                            <h3 class="text-xl font-semibold">${tool.name}</h3>
+                        </div>
+                        <p class="text-gray-600 dark:text-gray-300 mb-4">${tool.description}</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm text-gray-500">使用次数: <span class="usage-count">${usage}</span></span>
+                        </div>
+                    `;
+
+                    const favoriteBtn = document.createElement('button');
+                    favoriteBtn.className = 'favorite-btn';
+                    favoriteBtn.setAttribute('data-tool', tool.toolId);
+                    favoriteBtn.innerHTML = '⭐';
+
+                    toolContainer.appendChild(toolCard);
+                    toolContainer.appendChild(favoriteBtn);
+                    toolsContainer.appendChild(toolContainer);
+                });
+            }
+
+
+            // 工具点击处理
+            function handleToolClick(toolName) {
+                // 更新使用次数
+                let usage = localStorage.getItem(`usage_${toolName}`) || 0;
+                usage = parseInt(usage) + 1;
+                localStorage.setItem(`usage_${toolName}`, usage);
+
+                // 更新UI
+                const usageElement = document.querySelector(`.tool-card[data-tool="${toolName}"] .usage-count`);
+                if (usageElement) usageElement.textContent = usage;
+            }
+
+            // 收藏功能
+            function toggleFavorite(toolName) {
+                let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+
+                if (favorites.includes(toolName)) {
+                    favorites = favorites.filter(item => item !== toolName);
+                } else {
+                    favorites.push(toolName);
+                }
+
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+                updateFavoriteButtons();
+                renderFavorites();
+            }
+
+            // 更新收藏按钮状态
+            function updateFavoriteButtons() {
+                const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+                document.querySelectorAll('.favorite-btn').forEach(btn => {
+                    const toolName = btn.getAttribute('data-tool');
+                    if (favorites.includes(toolName)) {
+                        btn.textContent = '★';
+                        btn.classList.add('text-yellow-400');
+                    } else {
+                        btn.textContent = '⭐';
+                        btn.classList.remove('text-yellow-400');
+                    }
+                });
+            }
+
+            // 渲染收藏列表
+            function renderFavorites() {
+                const favoritesContainer = document.getElementById('favorites-container');
+                if (!favoritesContainer) return;
+
+                const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+
+                if (favorites.length === 0) {
+                    favoritesContainer.innerHTML = '<p class="text-gray-500 dark:text-gray-400">暂无收藏的工具</p>';
+                    return;
+                }
+
+                favoritesContainer.innerHTML = '';
+
+                // 创建收藏工具列表
+                const favoritesList = document.createElement('div');
+                favoritesList.className = 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4';
+
+                favorites.forEach(toolName => {
+                    const toolData = toolsData.find(tool => tool.toolId === toolName);
+                    if (toolData) {
+                        const usage = localStorage.getItem(`usage_${toolName}`) || 0;
+
+                        const favoriteCard = document.createElement('div');
+                        favoriteCard.className = 'favorite-tool';
+                        favoriteCard.innerHTML = `
+                            <div class="flex items-center mb-4">
+                                <span class="text-3xl mr-3">${toolData.icon}</span>
+                                <h3 class="text-xl font-semibold">${toolData.name}</h3>
+                            </div>
+                            <p class="text-gray-600 dark:text-gray-300 mb-4">${toolData.description}</p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-sm text-gray-500">使用次数: <span class="usage-count">${usage}</span></span>
+                                <button class="favorite-btn p-1 rounded-full hover:bg-gray-200 dark:hover:bg-gray-600 text-yellow-400" data-tool="${toolData.toolId}">★</button>
+                            </div>
+                            <div class="mt-4 flex justify-between">
+                                <a href="${toolData.link}" class="px-3 py-1 bg-blue-500 text-white rounded hover:bg-blue-600 text-sm">使用工具</a>
+                                <button class="px-2 py-1 text-xs bg-red-100 dark:bg-red-900 text-red-600 dark:text-red-200 rounded hover:bg-red-200 dark:hover:bg-red-800 remove-favorite-btn" data-tool="${toolData.toolId}">移除收藏</button>
+                            </div>
+                        `;
+
+                        favoritesList.appendChild(favoriteCard);
+                    }
+                });
+
+                favoritesContainer.appendChild(favoritesList);
+
+                // 为收藏列表中的按钮添加事件监听
+                favoritesContainer.querySelectorAll('.favorite-btn').forEach(btn => {
+                    btn.addEventListener('click', function (e) {
+                        e.preventDefault();
+                        const toolName = this.getAttribute('data-tool');
+                        toggleFavorite(toolName);
+                    });
+                });
+
+                favoritesContainer.querySelectorAll('.remove-favorite-btn').forEach(btn => {
+                    btn.addEventListener('click', function (e) {
+                        e.preventDefault();
+                        const toolName = this.getAttribute('data-tool');
+                        toggleFavorite(toolName);
+                    });
+                });
+            }
+
+            // 初始化使用次数显示
+            function initUsageCounts() {
+                document.querySelectorAll('.tool-card').forEach(card => {
+                    const toolName = card.getAttribute('data-tool');
+                    const usage = localStorage.getItem(`usage_${toolName}`) || 0;
+                    const usageElement = card.querySelector('.usage-count');
+                    if (usageElement) usageElement.textContent = usage;
+                });
+            }
+
+            // 事件绑定
+            function bindEvents() {
+                // 工具卡片点击
+                document.querySelectorAll('.tool-card').forEach(card => {
+                    card.addEventListener('click', function (e) {
+                        // 如果点击的是收藏按钮，则不处理
+                        if (e.target.closest('.favorite-btn')) {
+                            return;
+                        }
+                        const toolName = this.getAttribute('data-tool');
+                        handleToolClick(toolName);
+                        // 允许正常跳转
+                    });
+                });
+
+                // 收藏按钮点击
+                document.querySelectorAll('.favorite-btn').forEach(btn => {
+                    btn.addEventListener('click', function (e) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        const toolName = this.getAttribute('data-tool');
+                        toggleFavorite(toolName);
+                    });
+                });
+            }
+
+            // 初始化应用
+            function initApp() {
+                applyTheme();
+                renderTools();
+                bindEvents();
+                updateFavoriteButtons();
+                renderFavorites();
+            }
+
+            initApp();
+        });
+
+        // 粒子效果初始化
+        particlesJS('particles-js', {
+            particles: {
+                number: { value: 60, density: { enable: true, value_area: 800 } },
+                color: { value: "#6366f1" },
+                shape: { type: "circle" },
+                opacity: { value: 0.5, random: true },
+                size: { value: 3, random: true },
+                line_linked: { enable: true, distance: 150, color: "#8b5cf6", opacity: 0.4, width: 1 },
+                move: { enable: true, speed: 2, direction: "none", random: true, straight: false, out_mode: "out" }
+            },
+            interactivity: {
+                detect_on: "canvas",
+                events: {
+                    onhover: { enable: true, mode: "grab" },
+                    onclick: { enable: true, mode: "push" }
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

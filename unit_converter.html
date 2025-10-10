@@ -1,0 +1,271 @@
+<!-- minimalist_toolbox/frontend/timestamp_converter.html -->
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>时间戳转换工具 - 在线时间戳与日期互转 | 极简工具箱</title>
+    <meta name="description" content="免费在线时间戳转换工具，支持秒级和毫秒级时间戳与日期时间互相转换。简单易用，无需下载，即刻使用。">
+    <meta name="keywords" content="时间戳转换, Unix时间戳, 时间戳转日期, 日期转时间戳, 在线工具, 时间转换工具">
+    <meta name="author" content="极简工具箱">
+    
+    <!-- 开放图谱(Open Graph)标签 -->
+    <meta property="og:title" content="时间戳转换工具 - 在线时间戳与日期互转 | 极简工具箱">
+    <meta property="og:description" content="免费在线时间戳转换工具，支持秒级和毫秒级时间戳与日期时间互相转换。">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://yourdomain.com/timestamp_converter.html">
+    <meta property="og:image" content="https://yourdomain.com/images/timestamp-tool-og.jpg">
+    
+    <!-- Twitter卡片 -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="时间戳转换工具 - 在线时间戳与日期互转">
+    <meta name="twitter:description" content="免费在线时间戳转换工具，支持秒级和毫秒级时间戳与日期时间互相转换。">
+    <meta name="twitter:image" content="https://yourdomain.com/images/timestamp-tool-twitter.jpg">
+    
+    <!-- 规范链接 -->
+    <link rel="canonical" href="https://yourdomain.com/timestamp_converter.html">
+    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link href="https://fonts.loli.net/css?family=Noto+Sans+SC:400,500,700&display=swap" rel="stylesheet">
+    <link href="../css/style.css" rel="stylesheet">
+    <link href="../css/tools.css" rel="stylesheet">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6400988749068679"
+     crossorigin="anonymous"></script>
+    <style>
+        .converter-card {
+            transition: all 0.3s ease;
+        }
+        .converter-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        .time-input {
+            font-family: monospace;
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-gray-50 dark:bg-gray-900">
+    <div id="particles-js" class="particles"></div>
+    
+    <div class="container mx-auto px-4 py-8">
+        <header class="mb-8">
+            <div class="flex justify-between items-center">
+                <div>
+                    <h1 class="text-3xl font-bold gradient-text">时间戳转换工具</h1>
+                    <p class="text-gray-600 dark:text-gray-300 mt-2">在线Unix时间戳与日期时间格式互转工具 - 支持秒级和毫秒级时间戳</p>
+                </div>
+                <a href="../index.html" class="px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition">返回首页</a>
+            </div>
+        </header>
+
+        <main>
+            <div class="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6 mb-8">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <section class="converter-card bg-gray-100 dark:bg-gray-700 rounded-lg p-6">
+                        <h2 class="text-lg font-semibold mb-4 flex items-center">
+                            <span class="text-xl mr-2">⏱️</span>
+                            时间戳转日期
+                        </h2>
+                        <div class="space-y-4">
+                            <div>
+                                <label class="block text-sm font-medium mb-2">时间戳</label>
+                                <input type="text" id="timestamp-input" class="w-full bg-white dark:bg-gray-600 border border-gray-300 dark:border-gray-500 rounded-lg px-4 py-3 time-input" placeholder="输入时间戳（10位或13位数字）">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium mb-2">时间戳单位</label>
+                                <select id="timestamp-unit" class="w-full bg-white dark:bg-gray-600 border border-gray-300 dark:border-gray-500 rounded-lg px-4 py-3">
+                                    <option value="seconds">秒</option>
+                                    <option value="milliseconds">毫秒</option>
+                                </select>
+                            </div>
+                            <div>
+                                <button id="convert-to-date-btn" class="w-full py-3 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition">
+                                    转换为日期
+                                </button>
+                            </div>
+                            <div class="bg-white dark:bg-gray-600 rounded-lg p-4">
+                                <label class="block text-sm font-medium mb-2">结果</label>
+                                <div id="date-result" class="text-lg font-medium">-</div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="converter-card bg-gray-100 dark:bg-gray-700 rounded-lg p-6">
+                        <h2 class="text-lg font-semibold mb-4 flex items-center">
+                            <span class="text-xl mr-2">📅</span>
+                            日期转时间戳
+                        </h2>
+                        <div class="space-y-4">
+                            <div>
+                                <label class="block text-sm font-medium mb-2">日期</label>
+                                <input type="datetime-local" id="date-input" class="w-full bg-white dark:bg-gray-600 border border-gray-300 dark:border-gray-500 rounded-lg px-4 py-3">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium mb-2">输出单位</label>
+                                <select id="output-unit" class="w-full bg-white dark:bg-gray-600 border border-gray-300 dark:border-gray-500 rounded-lg px-4 py-3">
+                                    <option value="seconds">秒</option>
+                                    <option value="milliseconds">毫秒</option>
+                                </select>
+                            </div>
+                            <div>
+                                <button id="convert-to-timestamp-btn" class="w-full py-3 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition">
+                                    转换为时间戳
+                                </button>
+                            </div>
+                            <div class="bg-white dark:bg-gray-600 rounded-lg p-4">
+                                <label class="block text-sm font-medium mb-2">结果</label>
+                                <div id="timestamp-result" class="text-lg font-medium">-</div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+
+            <section class="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6 mb-8">
+                <h2 class="text-lg font-semibold mb-4">时间戳基础知识</h2>
+                <div class="text-sm text-gray-700 dark:text-gray-300 space-y-4">
+                    <p>Unix时间戳是指格林威治时间1970年01月01日00时00分00秒(北京时间1970年01月01日08时00分00秒)起至现在的总秒数或毫秒数。</p>
+                    <p>时间戳通常有以下两种表示方式：</p>
+                    <ul class="list-disc pl-5">
+                        <li>秒级时间戳：10位数字，如 1672502400</li>
+                        <li>毫秒级时间戳：13位数字，如 1672502400000</li>
+                    </ul>
+                    <p>本工具支持两种时间戳与日期之间的相互转换，简单易用，无需注册即可使用。</p>
+                </div>
+            </section>
+
+            <section class="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+                <h2 class="text-lg font-semibold mb-4">时间戳常见问题</h2>
+                <div class="space-y-6">
+                    <div>
+                        <h3 class="font-medium mb-2">什么是Unix时间戳？</h3>
+                        <p class="text-sm text-gray-700 dark:text-gray-300">Unix时间戳是从1970年1月1日（UTC/GMT的午夜）开始所经过的秒数或毫秒数，不考虑闰秒。它是一个跨平台、跨系统的时间表示方法，被广泛应用在编程和系统管理中。</p>
+                    </div>
+                    <div>
+                        <h3 class="font-medium mb-2">时间戳转换有什么实际应用？</h3>
+                        <p class="text-sm text-gray-700 dark:text-gray-300">时间戳转换常用于软件开发、数据分析、日志分析等领域。程序员经常需要将数据库中的时间戳转换为可读日期，或者将日期时间转换为时间戳进行存储和计算。</p>
+                    </div>
+                    <div>
+                        <h3 class="font-medium mb-2">如何在不同编程语言中获取当前时间戳？</h3>
+                        <p class="text-sm text-gray-700 dark:text-gray-300">
+                            JavaScript: <code class="bg-gray-100 dark:bg-gray-700 px-1 rounded">Math.floor(Date.now() / 1000)</code> (秒) 或 <code class="bg-gray-100 dark:bg-gray-700 px-1 rounded">Date.now()</code> (毫秒)<br>
+                            Python: <code class="bg-gray-100 dark:bg-gray-700 px-1 rounded">import time; time.time()</code> (秒)<br>
+                            PHP: <code class="bg-gray-100 dark:bg-gray-700 px-1 rounded">time()</code> (秒) 或 <code class="bg-gray-100 dark:bg-gray-700 px-1 rounded">round(microtime(true) * 1000)</code> (毫秒)
+                        </p>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
+    <script src="../js/tools/timestamp_converter.js"></script>
+    <script>
+        // 粒子效果
+        particlesJS('particles-js', {
+            particles: {
+                number: { value: 60, density: { enable: true, value_area: 800 } },
+                color: { value: "#6366f1" },
+                shape: { type: "circle" },
+                opacity: { value: 0.5, random: true },
+                size: { value: 3, random: true },
+                line_linked: { enable: true, distance: 150, color: "#8b5cf6", opacity: 0.4, width: 1 },
+                move: { enable: true, speed: 2, direction: "none", random: true, straight: false, out_mode: "out" }
+            },
+            interactivity: {
+                detect_on: "canvas",
+                events: {
+                    onhover: { enable: true, mode: "grab" },
+                    onclick: { enable: true, mode: "push" }
+                }
+            }
+        });
+
+        // 暗黑模式切换
+        if (localStorage.getItem('theme') === 'dark' || 
+            (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        }
+
+        // 时间戳转换功能
+        document.getElementById('convert-to-date-btn').addEventListener('click', () => {
+            const timestamp = document.getElementById('timestamp-input').value.trim();
+            const unit = document.getElementById('timestamp-unit').value;
+            
+            if (!timestamp) {
+                document.getElementById('date-result').textContent = '请输入时间戳';
+                return;
+            }
+
+            let date;
+            if (unit === 'seconds') {
+                date = new Date(parseInt(timestamp) * 1000);
+            } else {
+                date = new Date(parseInt(timestamp));
+            }
+
+            if (isNaN(date.getTime())) {
+                document.getElementById('date-result').textContent = '无效的时间戳';
+                return;
+            }
+
+            const options = {
+                year: 'numeric',
+                month: '2-digit',
+                day: '2-digit',
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit',
+                hour12: false
+            };
+            
+            document.getElementById('date-result').textContent = date.toLocaleString('zh-CN', options);
+        });
+
+        document.getElementById('convert-to-timestamp-btn').addEventListener('click', () => {
+            const dateString = document.getElementById('date-input').value;
+            
+            if (!dateString) {
+                document.getElementById('timestamp-result').textContent = '请选择日期';
+                return;
+            }
+
+            const date = new Date(dateString);
+            const unit = document.getElementById('output-unit').value;
+            
+            let timestamp;
+            if (unit === 'seconds') {
+                timestamp = Math.floor(date.getTime() / 1000);
+            } else {
+                timestamp = date.getTime();
+            }
+
+            document.getElementById('timestamp-result').textContent = timestamp;
+        });
+
+        // 设置当前日期为默认值
+        document.getElementById('date-input').valueAsDate = new Date();
+    </script>
+    
+    <!-- 结构化数据 -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "时间戳转换工具",
+      "description": "免费在线时间戳转换工具，支持秒级和毫秒级时间戳与日期时间互相转换。",
+      "applicationCategory": "UtilityApplication",
+      "operatingSystem": "All",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "CNY"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "极简工具箱"
+      }
+    }
+    </script>
+</body>
+</html>

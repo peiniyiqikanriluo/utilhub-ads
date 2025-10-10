@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>在线Markdown编辑器 - 实时预览 | 极简工具箱</title>
+
+    <!-- SEO Meta -->
+    <meta name="description" content="极简在线Markdown编辑器，支持实时预览、分屏编辑、代码高亮、PDF/HTML/Markdown格式导出，帮助你高效写作和分享。">
+    <meta name="keywords" content="Markdown编辑器,在线Markdown,Markdown预览,Markdown转PDF,Markdown转HTML,Markdown工具,极简工具箱">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="在线Markdown编辑器 - 极简工具箱">
+    <meta property="og:description" content="支持实时预览、分屏、导出PDF/HTML/Markdown的Markdown编辑器。">
+    <meta property="og:url" content="https://yourdomain.com/markdown-editor">
+    <meta property="og:image" content="https://yourdomain.com/assets/markdown-editor-preview.png">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="在线Markdown编辑器 - 极简工具箱">
+    <meta name="twitter:description" content="支持实时预览、分屏、导出PDF/HTML/Markdown的Markdown编辑器。">
+    <meta name="twitter:image" content="https://yourdomain.com/assets/markdown-editor-preview.png">
+
+    <!-- 性能优化 -->
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link href="https://fonts.loli.net/css?family=Noto+Sans+SC:400,500,700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/4.0.2/marked.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js" defer></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/github.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" defer></script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6400988749068679"
+     crossorigin="anonymous"></script>
+    <style>
+        :root {
+            --primary: #4f46e5;
+            --hover: #f3f4f6;
+            --text: #1f2937;
+        }
+
+        .dark {
+            --primary: #6366f1;
+            --hover: #374151;
+            --text: #f9fafb;
+        }
+
+        body {
+            font-family: 'Noto Sans SC', sans-serif;
+            background-color: #f9fafb;
+            color: var(--text);
+            transition: all 0.3s ease;
+        }
+
+        .dark body {
+            background-color: #111827;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem;
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .editor-container,
+        .preview-container {
+            min-height: 400px;
+            height: 50vh;
+        }
+
+        .preview-container {
+            overflow-y: auto;
+        }
+
+        .tab-button {
+            background-color: var(--hover);
+            transition: all 0.3s ease;
+        }
+
+        .tab-button.active {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        /* 完整的Markdown样式 */
+        .markdown-body {
+            font-family: 'Noto Sans SC', sans-serif;
+            font-size: 16px;
+            line-height: 1.6;
+            color: var(--text);
+        }
+
+        .markdown-body h1 {
+            font-size: 2em;
+            font-weight: 600;
+            padding-bottom: 0.3em;
+            margin-bottom: 16px;
+            border-bottom: 1px solid #eaecef;
+        }
+
+        .markdown-body h2 {
+            font-size: 1.5em;
+            font-weight: 600;
+            padding-bottom: 0.3em;
+            margin-top: 24px;
+            margin-bottom: 16px;
+            border-bottom: 1px solid #eaecef;
+        }
+
+        .markdown-body h3 {
+            font-size: 1.25em;
+            font-weight: 600;
+            margin-top: 24px;
+            margin-bottom: 16px;
+        }
+
+        .markdown-body h4 {
+            font-size: 1em;
+            font-weight: 600;
+            margin-top: 24px;
+            margin-bottom: 16px;
+        }
+
+        .markdown-body h5 {
+            font-size: 0.875em;
+            font-weight: 600;
+            margin-top: 24px;
+            margin-bottom: 16px;
+        }
+
+        .markdown-body h6 {
+            font-size: 0.85em;
+            font-weight: 600;
+            margin-top: 24px;
+            margin-bottom: 16px;
+            color: #6a737d;
+        }
+
+        .markdown-body p {
+            margin-top: 0;
+            margin-bottom: 16px;
+        }
+
+        .markdown-body ul,
+        .markdown-body ol {
+            padding-left: 2em;
+            margin-bottom: 16px;
+        }
+
+        .markdown-body li {
+            margin-top: 0.25em;
+        }
+
+        .markdown-body blockquote {
+            padding: 0 1em;
+            color: #6a737d;
+            border-left: 0.25em solid #dfe2e5;
+            margin: 0 0 16px 0;
+        }
+
+        .markdown-body pre {
+            background-color: var(--hover);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+            margin-bottom: 16px;
+        }
+
+        .markdown-body code {
+            background-color: var(--hover);
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.3rem;
+            font-family: monospace;
+        }
+
+        .markdown-body img {
+            max-width: 100%;
+            margin-bottom: 16px;
+        }
+
+        .markdown-body table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-bottom: 16px;
+        }
+
+        .markdown-body th,
+        .markdown-body td {
+            padding: 0.5rem;
+            border: 1px solid #dfe2e5;
+        }
+
+        .markdown-body th {
+            font-weight: 600;
+            background-color: var(--hover);
+        }
+
+        .markdown-body tr:nth-child(even) {
+            background-color: var(--hover);
+        }
+
+        .markdown-body hr {
+            height: 0.25em;
+            padding: 0;
+            margin: 24px 0;
+            background-color: #e1e4e8;
+            border: 0;
+        }
+
+        .toolbar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .toolbar button {
+            padding: 0.5rem;
+            background: var(--hover);
+            border: none;
+            border-radius: 0.25rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .toolbar button:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .download-options {
+            display: none;
+            position: absolute;
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 0.5rem;
+            padding: 0.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            z-index: 10;
+            right: 0;
+            width: 180px;
+        }
+
+        .dark .download-options {
+            background: #374151;
+            border-color: #4b5563;
+        }
+
+        .download-options button {
+            display: block;
+            width: 100%;
+            text-align: left;
+            padding: 0.5rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .download-options button:hover {
+            background: #f0f0f0;
+        }
+
+        .dark .download-options button:hover {
+            background: #4b5563;
+        }
+
+        .card {
+            background: white;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .dark .card {
+            background: #1f2937;
+        }
+
+        textarea {
+            width: 100%;
+            height: 100%;
+            background: transparent;
+            resize: none;
+            outline: none;
+            border: none;
+            font-family: 'Noto Sans SC', monospace;
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .theme-toggle {
+            position: fixed;
+            top: 1rem;
+            right: 1rem;
+            background: var(--hover);
+            border: none;
+            border-radius: 50%;
+            width: 2.5rem;
+            height: 2.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            z-index: 20;
+        }
+
+        .split-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .split-container {
+                grid-template-columns: 1fr;
+            }
+
+            .editor-container,
+            .preview-container {
+                height: 300px;
+            }
+        }
+    </style>
+</head>
+
+<body class="min-h-screen">
+
+    <main class="container mx-auto px-4 py-8">
+        <button class="theme-toggle" id="theme-toggle">🌙</button>
+        <div class="container mx-auto px-4 py-8">
+            <header class="mb-8">
+                <div class="flex justify-between items-center">
+                    <header class="mb-8">
+                        <h1 class="text-3xl font-bold gradient-text">在线Markdown编辑器</h1>
+                        <p class="text-gray-600 dark:text-gray-300 mt-2">实时预览 · 分屏编辑 · 一键导出 PDF/HTML/MD</p>
+                    </header>
+                    <a href="./index.html"
+                        class="px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition">返回首页</a>
+                </div>
+            </header>
+
+            <div class="card">
+                <div class="flex justify-between items-center mb-6">
+                    <div class="flex space-x-2">
+                        <button class="tab-button px-4 py-2 rounded-lg active" data-tab="editor">编辑器</button>
+                        <button class="tab-button px-4 py-2 rounded-lg" data-tab="preview">预览</button>
+                        <button class="tab-button px-4 py-2 rounded-lg" data-tab="both">分屏</button>
+                    </div>
+                    <div class="relative">
+                        <button id="download-btn"
+                            class="px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition flex items-center">
+                            下载
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-1" fill="none" viewBox="0 0 24 24"
+                                stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </button>
+                        <div id="download-options" class="download-options">
+                            <button data-format="md">下载为Markdown (.md)</button>
+                            <button data-format="html">下载为HTML (.html)</button>
+                            <button data-format="pdf">下载为PDF (.pdf)</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="toolbar">
+                    <button data-action="bold" title="加粗">B</button>
+                    <button data-action="italic" title="斜体">I</button>
+                    <button data-action="heading" title="标题">H</button>
+                    <button data-action="link" title="链接">🔗</button>
+                    <button data-action="image" title="图片">🖼️</button>
+                    <button data-action="code" title="代码">&lt;/&gt;</button>
+                    <button data-action="quote" title="引用">❝</button>
+                    <button data-action="ul" title="无序列表">•</button>
+                    <button data-action="ol" title="有序列表">1.</button>
+                </div>
+
+                <div id="editor" class="tab-panel">
+                    <div class="editor-container bg-gray-100 dark:bg-gray-700 rounded-lg p-4">
+                        <textarea id="markdown-input" class="w-full h-full" placeholder="输入Markdown内容..."># Markdown 示例
+## 标题
+这是一个 **加粗** 的文字和 *斜体* 的文字
+
+## 列表
+- 无序列表项1
+- 无序列表项2
+- 无序列表项3
+
+1. 有序列表项1
+2. 有序列表项2
+3. 有序列表项3
+
+## 代码
+\`行内代码\`
+
+\`\`\`javascript
+// 代码块
+function helloWorld() {
+console.log('Hello, World!');
+}
+\`\`\`
+
+## 引用
+> 这是一个引用块。Markdown使得写作变得更加简单。
+
+## 表格
+| 姓名 | 年龄 | 职业 |
+|------|------|------|
+| 张三 | 28   | 工程师 |
+| 李四 | 32   | 设计师 |
+
+## 链接和图片
+[访问极简工具箱](https://example.com)
+
+![示例图片](https://via.placeholder.com/150)
+                    </textarea>
+                    </div>
+                </div>
+
+                <div id="preview" class="tab-panel hidden">
+                    <div class="preview-container bg-gray-100 dark:bg-gray-700 rounded-lg p-4 markdown-body">
+                        <div id="markdown-preview"></div>
+                    </div>
+                </div>
+
+                <div id="both" class="tab-panel hidden">
+                    <div class="split-container">
+                        <div class="editor-container bg-gray-100 dark:bg-gray-700 rounded-lg p-4">
+                            <textarea id="markdown-input-split" class="w-full h-full"></textarea>
+                        </div>
+                        <div class="preview-container bg-gray-100 dark:bg-gray-700 rounded-lg p-4 markdown-body">
+                            <div id="markdown-preview-split"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2 class="text-xl font-bold mb-4">Markdown语法参考</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <h3 class="font-medium mb-2">基本格式</h3>
+                        <ul class="list-disc pl-5 space-y-1">
+                            <li><code># 标题1</code></li>
+                            <li><code>## 标题2</code></li>
+                            <li><code>**加粗**</code></li>
+                            <li><code>*斜体*</code></li>
+                            <li><code>[链接](url)</code></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="font-medium mb-2">高级格式</h3>
+                        <ul class="list-disc pl-5 space-y-1">
+                            <li><code>![图片](url)</code></li>
+                            <li><code>&gt; 引用</code></li>
+                            <li><code>- 列表项</code></li>
+                            <li><code>1. 有序列表</code></li>
+                            <li><code>```代码块```</code></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer class="text-center text-gray-500 mt-10">
+        <p>© 2025 极简工具箱 | 在线Markdown编辑器</p>
+    </footer>
+    <script src="./js/tools/markdown_editor.js"></script>
+</body>
+
+</html>
