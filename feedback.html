@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>意见反馈 - 极简工具箱</title>
+    <meta name="description" content="极简工具箱意见反馈，欢迎提出宝贵建议和问题反馈。">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6366f1;
+            --secondary: #8b5cf6;
+            --bg: #f8fafc;
+            --text: #1e293b;
+            --card: #ffffff;
+            --hover: #e2e8f0;
+        }
+
+        .dark {
+            --primary: #818cf8;
+            --secondary: #a78bfa;
+            --bg: #0f172a;
+            --text: #f8fafc;
+            --card: #1e293b;
+            --hover: #334155;
+        }
+
+        body {
+            font-family: 'Noto Sans SC', sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            transition: all 0.3s ease;
+        }
+
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        .gradient-text {
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .content-container {
+            background-color: var(--card);
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+        }
+
+        .back-button {
+            background-color: var(--primary);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            display: inline-flex;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .back-button:hover {
+            background-color: var(--secondary);
+            transform: translateY(-2px);
+        }
+
+        .feedback-option {
+            border: 1px solid #e2e8f0;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .dark .feedback-option {
+            border: 1px solid #334155;
+        }
+
+        .feedback-option:hover {
+            border-color: var(--primary);
+            background-color: rgba(99, 102, 241, 0.05);
+        }
+
+        .dark .feedback-option:hover {
+            background-color: rgba(99, 102, 241, 0.1);
+        }
+
+        .feedback-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+            margin-right: 1rem;
+        }
+
+        .email-button {
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            display: inline-flex;
+            align-items: center;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .email-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+    <div id="particles-js" class="particles"></div>
+
+    <div class="container mx-auto px-4 py-8">
+        <header class="mb-8">
+            <div class="flex justify-between items-center">
+                <div>
+                    <a href="index.html" class="back-button">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clip-rule="evenodd" />
+                        </svg>
+                        返回首页
+                    </a>
+                </div>
+                <button id="theme-toggle" class="p-2 rounded-full bg-gray-200 dark:bg-gray-700">
+                    <span id="theme-icon">🌙</span>
+                </button>
+            </div>
+        </header>
+
+        <div class="content-container">
+            <h1 class="text-3xl font-bold gradient-text mb-6">意见反馈</h1>
+            
+            <div class="space-y-8">
+                <section>
+                    <h2 class="text-xl font-semibold mb-4">欢迎提出宝贵意见</h2>
+                    <p class="text-gray-600 dark:text-gray-300 mb-6">
+                        您的反馈对我们非常重要！如果您在使用极简工具箱过程中遇到问题，或者有任何建议和改进意见，请通过邮件联系我们。
+                    </p>
+                </section>
+
+                <section>
+                    <h2 class="text-xl font-semibold mb-4">反馈类型</h2>
+                    
+                    <div class="feedback-option" onclick="selectFeedbackType('bug')">
+                        <div class="flex items-center">
+                            <div class="feedback-icon">🐛</div>
+                            <div>
+                                <h3 class="font-semibold">问题报告</h3>
+                                <p class="text-gray-600 dark:text-gray-300 text-sm">发现工具无法正常工作或存在错误</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="feedback-option" onclick="selectFeedbackType('suggestion')">
+                        <div class="flex items-center">
+                            <div class="feedback-icon">💡</div>
+                            <div>
+                                <h3 class="font-semibold">功能建议</h3>
+                                <p class="text-gray-600 dark:text-gray-300 text-sm">希望添加新功能或改进现有功能</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="feedback-option" onclick="selectFeedbackType('experience')">
+                        <div class="flex items-center">
+                            <div class="feedback-icon">🎨</div>
+                            <div>
+                                <h3 class="font-semibold">体验反馈</h3>
+                                <p class="text-gray-600 dark:text-gray-300 text-sm">关于界面设计、易用性等方面的建议</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="feedback-option" onclick="selectFeedbackType('other')">
+                        <div class="flex items-center">
+                            <div class="feedback-icon">📝</div>
+                            <div>
+                                <h3 class="font-semibold">其他反馈</h3>
+                                <p class="text-gray-600 dark:text-gray-300 text-sm">不属于以上类别的其他反馈</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section>
+                    <h2 class="text-xl font-semibold mb-4" id="feedback-title">发送反馈</h2>
+                    <p class="text-gray-600 dark:text-gray-300 mb-4">
+                        请点击下方按钮通过邮件发送您的反馈。为了帮助我们更好地理解和解决问题，请在邮件中尽可能详细地描述您遇到的问题或建议。
+                    </p>
+                    
+                    <div class="bg-gray-100 dark:bg-gray-700 p-4 rounded-lg mb-4">
+                        <p class="text-gray-600 dark:text-gray-300 text-sm mb-2">建议包含以下信息：</p>
+                        <ul class="list-disc pl-5 text-gray-600 dark:text-gray-300 text-sm space-y-1">
+                            <li>您使用的工具名称</li>
+                            <li>问题或建议的详细描述</li>
+                            <li>如果报告问题，请说明重现步骤</li>
+                            <li>您的浏览器和操作系统信息（可选）</li>
+                        </ul>
+                    </div>
+                    
+                    <a href="mailto:ghgyvkhygt123@2925.com" class="email-button" id="email-button">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                            <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
+                            <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
+                        </svg>
+                        发送邮件反馈
+                    </a>
+                </section>
+
+                <section>
+                    <h2 class="text-xl font-semibold mb-4">其他联系方式</h2>
+                    <p class="text-gray-600 dark:text-gray-300 mb-4">
+                        如果您无法通过邮件联系我们，也可以尝试以下方式：
+                    </p>
+                    <div class="bg-gray-100 dark:bg-gray-700 p-4 rounded-lg">
+                        <p class="text-gray-600 dark:text-gray-300 text-sm">邮箱：ghgyvkhygt123@2925.com</p>
+                    </div>
+                </section>
+
+                <section>
+                    <h2 class="text-xl font-semibold mb-4">反馈处理</h2>
+                    <p class="text-gray-600 dark:text-gray-300">
+                        我们会在收到反馈后尽快回复。对于有价值的建议和问题报告，我们会在后续版本中考虑改进和修复。
+                    </p>
+                </section>
+            </div>
+        </div>
+
+        <footer class="bg-white dark:bg-gray-800 rounded-xl shadow-md p-8 mt-12">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
+                <!-- 网站介绍 -->
+                <div>
+                    <h3 class="text-lg font-semibold mb-4 gradient-text">极简工具箱</h3>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm mb-4">
+                        提供简单高效的在线工具集合，满足您的日常需求。
+                    </p>
+                </div>
+
+                <!-- 工具导航 -->
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">工具导航</h3>
+                    <ul class="space-y-2">
+                        <li><a href="file_converter.html" class="text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary text-sm transition-colors">文件转换器</a></li>
+                        <li><a href="password_generator.html" class="text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary text-sm transition-colors">密码生成器</a></li>
+                        <li><a href="qr_generator.html" class="text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary text-sm transition-colors">二维码生成器</a></li>
+                        <li><a href="json_formatter.html" class="text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary text-sm transition-colors">JSON格式化</a></li>
+                        <li><a href="index.html" class="text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary text-sm transition-colors">查看全部工具</a></li>
+                    </ul>
+                </div>
+
+                <!-- 支持与帮助 -->
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">支持与帮助</h3>
+                    <ul class="space-y-2">
+                        <li><a href="help_document.html" class="text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary text-sm transition-colors">帮助文档</a></li>
+                        <li><a href="faq.html" class="text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary text-sm transition-colors">常见问题</a></li>
+                        <li><a href="feedback.html" class="text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary text-sm transition-colors">意见反馈</a></li>
+                    </ul>
+                </div>
+
+                <!-- 关于我们 -->
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">关于我们</h3>
+                    <ul class="space-y-2">
+                        <li><a href="about.html" class="text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary text-sm transition-colors">关于极简工具箱</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 底部版权和备案信息 -->
+            <div class="pt-8 border-t border-gray-200 dark:border-gray-700">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <div class="mb-4 md:mb-0 text-center md:text-left">
+                        <p class="text-gray-500 dark:text-gray-400 text-sm">© 2025 极简工具箱. 保留所有权利.</p>
+                    </div>
+                    <div class="flex flex-wrap justify-center gap-6 mb-4 md:mb-0">
+                        <a href="privacy_policy.html" class="text-gray-500 dark:text-gray-400 hover:text-primary dark:hover:text-primary text-sm transition-colors">隐私政策</a>
+                        <a href="terms_of_service.html" class="text-gray-500 dark:text-gray-400 hover:text-primary dark:hover:text-primary text-sm transition-colors">服务条款</a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
+    <script>
+        // 反馈类型选择
+        function selectFeedbackType(type) {
+            const emailButton = document.getElementById('email-button');
+            let subject = '';
+            
+            switch(type) {
+                case 'bug':
+                    subject = '问题报告 - 极简工具箱';
+                    break;
+                case 'suggestion':
+                    subject = '功能建议 - 极简工具箱';
+                    break;
+                case 'experience':
+                    subject = '体验反馈 - 极简工具箱';
+                    break;
+                case 'other':
+                    subject = '其他反馈 - 极简工具箱';
+                    break;
+            }
+            
+            emailButton.href = `mailto:ghgyvkhygt123@2925.com?subject=${encodeURIComponent(subject)}`;
+            
+            // 高亮选中的选项
+            document.querySelectorAll('.feedback-option').forEach(option => {
+                option.style.borderColor = '';
+                option.style.backgroundColor = '';
+            });
+            
+            event.currentTarget.style.borderColor = 'var(--primary)';
+            event.currentTarget.style.backgroundColor = document.documentElement.classList.contains('dark') 
+                ? 'rgba(99, 102, 241, 0.1)' 
+                : 'rgba(99, 102, 241, 0.05)';
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            // 暗黑模式切换
+            const themeToggle = document.getElementById('theme-toggle');
+            const themeIcon = document.getElementById('theme-icon');
+
+            function applyTheme() {
+                if (localStorage.getItem('theme') === 'dark' ||
+                    (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                    document.documentElement.classList.add('dark');
+                    if (themeIcon) themeIcon.textContent = '☀️';
+                } else {
+                    document.documentElement.classList.remove('dark');
+                    if (themeIcon) themeIcon.textContent = '🌙';
+                }
+            }
+
+            if (themeToggle) {
+                themeToggle.addEventListener('click', function () {
+                    document.documentElement.classList.toggle('dark');
+                    localStorage.setItem('theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light');
+                    if (themeIcon) themeIcon.textContent = document.documentElement.classList.contains('dark') ? '☀️' : '🌙';
+                });
+            }
+
+            applyTheme();
+        });
+
+        // 粒子效果初始化
+        particlesJS('particles-js', {
+            particles: {
+                number: { value: 60, density: { enable: true, value_area: 800 } },
+                color: { value: "#6366f1" },
+                shape: { type: "circle" },
+                opacity: { value: 0.5, random: true },
+                size: { value: 3, random: true },
+                line_linked: { enable: true, distance: 150, color: "#8b5cf6", opacity: 0.4, width: 1 },
+                move: { enable: true, speed: 2, direction: "none", random: true, straight: false, out_mode: "out" }
+            },
+            interactivity: {
+                detect_on: "canvas",
+                events: {
+                    onhover: { enable: true, mode: "grab" },
+                    onclick: { enable: true, mode: "push" }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

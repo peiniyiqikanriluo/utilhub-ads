@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>关于我们 - 极简工具箱</title>
+    <meta name="description" content="了解极简工具箱的使命、愿景和团队信息。">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6366f1;
+            --secondary: #8b5cf6;
+            --bg: #f8fafc;
+            --text: #1e293b;
+            --card: #ffffff;
+            --hover: #e2e8f0;
+        }
+
+        .dark {
+            --primary: #818cf8;
+            --secondary: #a78bfa;
+            --bg: #0f172a;
+            --text: #f8fafc;
+            --card: #1e293b;
+            --hover: #334155;
+        }
+
+        body {
+            font-family: 'Noto Sans SC', sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            transition: all 0.3s ease;
+        }
+
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        .gradient-text {
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .content-container {
+            background-color: var(--card);
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+        }
+
+        .back-button {
+            background-color: var(--primary);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            display: inline-flex;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .back-button:hover {
+            background-color: var(--secondary);
+            transform: translateY(-2px);
+        }
+
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            margin: 0 auto 1rem;
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+    <div id="particles-js" class="particles"></div>
+
+    <div class="container mx-auto px-4 py-8">
+        <header class="mb-8">
+            <div class="flex justify-between items-center">
+                <div>
+                    <a href="index.html" class="back-button">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clip-rule="evenodd" />
+                        </svg>
+                        返回首页
+                    </a>
+                </div>
+                <button id="theme-toggle" class="p-2 rounded-full bg-gray-200 dark:bg-gray-700">
+                    <span id="theme-icon">🌙</span>
+                </button>
+            </div>
+        </header>
+
+        <div class="content-container">
+            <h1 class="text-3xl font-bold gradient-text mb-6">关于极简工具箱</h1>
+            
+            <div class="space-y-8">
+                <section>
+                    <h2 class="text-xl font-semibold mb-4">我们的使命</h2>
+                    <p class="text-gray-600 dark:text-gray-300 mb-4">
+                        极简工具箱致力于为用户提供简单、高效、实用的在线工具集合，帮助您解决日常工作和学习中的各种问题。
+                    </p>
+                    <p class="text-gray-600 dark:text-gray-300">
+                        我们相信技术应该服务于人，而不是让人感到困惑。因此，我们专注于开发那些真正有用、易于使用的工具，让每个人都能享受到技术带来的便利。
+                    </p>
+                </section>
+
+                <section>
+                    <h2 class="text-xl font-semibold mb-4">我们的特色</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
+                        <div class="text-center">
+                            <div class="feature-icon">🚀</div>
+                            <h3 class="font-semibold mb-2">快速高效</h3>
+                            <p class="text-gray-600 dark:text-gray-300 text-sm">所有工具都经过优化，确保快速响应和高效处理。</p>
+                        </div>
+                        <div class="text-center">
+                            <div class="feature-icon">🔒</div>
+                            <h3 class="font-semibold mb-2">隐私保护</h3>
+                            <p class="text-gray-600 dark:text-gray-300 text-sm">您的数据安全是我们的首要考虑，大多数工具在浏览器本地运行。</p>
+                        </div>
+                        <div class="text-center">
+                            <div class="feature-icon">🎨</div>
+                            <h3 class="font-semibold mb-2">简洁美观</h3>
+                            <p class="text-gray-600 dark:text-gray-300 text-sm">精心设计的界面，支持明暗主题切换，提供舒适的视觉体验。</p>
+                        </div>
+                    </div>
+                </section>
+
+                <section>
+                    <h2 class="text-xl font-semibold mb-4">工具类别</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="bg-gray-100 dark:bg-gray-700 p-4 rounded-lg">
+                            <h3 class="font-semibold mb-2">开发工具</h3>
+                            <ul class="text-sm text-gray-600 dark:text-gray-300 space-y-1">
+                                <li>• JSON格式化工具</li>
+                                <li>• Base64编码/解码</li>
+                                <li>• 正则表达式测试</li>
+                                <li>• URL编码/解码</li>
+                            </ul>
+                        </div>
+                        <div class="bg-gray-100 dark:bg-gray-700 p-4 rounded-lg">
+                            <h3 class="font-semibold mb-2">实用工具</h3>
+                            <ul class="text-sm text-gray-600 dark:text-gray-300 space-y-1">
+                                <li>• 密码生成器</li>
+                                <li>• 二维码生成器</li>
+                                <li>• 文件格式转换</li>
+                                <li>• 时间戳转换</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <section>
+                    <h2 class="text-xl font-semibold mb-4">技术特点</h2>
+                    <p class="text-gray-600 dark:text-gray-300 mb-4">
+                        极简工具箱采用现代Web技术开发，具有以下特点：
+                    </p>
+                    <ul class="list-disc pl-5 text-gray-600 dark:text-gray-300 space-y-2">
+                        <li>响应式设计，在各种设备上都能完美显示</li>
+                        <li>使用浏览器本地存储，保护用户隐私</li>
+                        <li>支持明暗主题切换，适应不同使用环境</li>
+                        <li>工具使用数据本地统计，帮助优化用户体验</li>
+                        <li>无需注册登录，即开即用</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h2 class="text-xl font-semibold mb-4">联系我们</h2>
+                    <p class="text-gray-600 dark:text-gray-300 mb-4">
+                        如果您对我们的工具有任何建议或发现了问题，欢迎通过以下方式联系我们：
+                    </p>
+                    <div class="bg-gray-100 dark:bg-gray-700 p-4 rounded-lg">
+                        <p class="text-gray-600 dark:text-gray-300">邮箱：ghgyvkhygt123@2925.com</p>
+                    </div>
+                </section>
+
+                <section>
+                    <h2 class="text-xl font-semibold mb-4">未来计划</h2>
+                    <p class="text-gray-600 dark:text-gray-300 mb-4">
+                        我们一直在努力改进和扩展极简工具箱的功能，未来的计划包括：
+                    </p>
+                    <ul class="list-disc pl-5 text-gray-600 dark:text-gray-300 space-y-2">
+                        <li>添加更多实用的在线工具</li>
+                        <li>优化现有工具的性能和用户体验</li>
+                        <li>开发移动端应用</li>
+                        <li>增加工具使用教程和文档</li>
+                    </ul>
+                </section>
+            </div>
+        </div>
+
+        <footer class="bg-white dark:bg-gray-800 rounded-xl shadow-md p-8 mt-12">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
+                <!-- 网站介绍 -->
+                <div>
+                    <h3 class="text-lg font-semibold mb-4 gradient-text">极简工具箱</h3>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm mb-4">
+                        提供简单高效的在线工具集合，满足您的日常需求。
+                    </p>
+                </div>
+
+                <!-- 工具导航 -->
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">工具导航</h3>
+                    <ul class="space-y-2">
+                        <li><a href="file_converter.html" class="text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary text-sm transition-colors">文件转换器</a></li>
+                        <li><a href="password_generator.html" class="text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary text-sm transition-colors">密码生成器</a></li>
+                        <li><a href="qr_generator.html" class="text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary text-sm transition-colors">二维码生成器</a></li>
+                        <li><a href="json_formatter.html" class="text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary text-sm transition-colors">JSON格式化</a></li>
+                        <li><a href="index.html" class="text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary text-sm transition-colors">查看全部工具</a></li>
+                    </ul>
+                </div>
+
+                <!-- 支持与帮助 -->
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">支持与帮助</h3>
+                    <ul class="space-y-2">
+                        <li><a href="help_document.html" class="text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary text-sm transition-colors">帮助文档</a></li>
+                        <li><a href="faq.html" class="text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary text-sm transition-colors">常见问题</a></li>
+                        <li><a href="feedback.html" class="text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary text-sm transition-colors">意见反馈</a></li>
+                    </ul>
+                </div>
+
+                <!-- 关于我们 -->
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">关于我们</h3>
+                    <ul class="space-y-2">
+                        <li><a href="about.html" class="text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary text-sm transition-colors">关于极简工具箱</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 底部版权和备案信息 -->
+            <div class="pt-8 border-t border-gray-200 dark:border-gray-700">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <div class="mb-4 md:mb-0 text-center md:text-left">
+                        <p class="text-gray-500 dark:text-gray-400 text-sm">© 2025 极简工具箱. 保留所有权利.</p>
+                    </div>
+                    <div class="flex flex-wrap justify-center gap-6 mb-4 md:mb-0">
+                        <a href="privacy_policy.html" class="text-gray-500 dark:text-gray-400 hover:text-primary dark:hover:text-primary text-sm transition-colors">隐私政策</a>
+                        <a href="terms_of_service.html" class="text-gray-500 dark:text-gray-400 hover:text-primary dark:hover:text-primary text-sm transition-colors">服务条款</a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // 暗黑模式切换
+            const themeToggle = document.getElementById('theme-toggle');
+            const themeIcon = document.getElementById('theme-icon');
+
+            function applyTheme() {
+                if (localStorage.getItem('theme') === 'dark' ||
+                    (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                    document.documentElement.classList.add('dark');
+                    if (themeIcon) themeIcon.textContent = '☀️';
+                } else {
+                    document.documentElement.classList.remove('dark');
+                    if (themeIcon) themeIcon.textContent = '🌙';
+                }
+            }
+
+            if (themeToggle) {
+                themeToggle.addEventListener('click', function () {
+                    document.documentElement.classList.toggle('dark');
+                    localStorage.setItem('theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light');
+                    if (themeIcon) themeIcon.textContent = document.documentElement.classList.contains('dark') ? '☀️' : '🌙';
+                });
+            }
+
+            applyTheme();
+        });
+
+        // 粒子效果初始化
+        particlesJS('particles-js', {
+            particles: {
+                number: { value: 60, density: { enable: true, value_area: 800 } },
+                color: { value: "#6366f1" },
+                shape: { type: "circle" },
+                opacity: { value: 0.5, random: true },
+                size: { value: 3, random: true },
+                line_linked: { enable: true, distance: 150, color: "#8b5cf6", opacity: 0.4, width: 1 },
+                move: { enable: true, speed: 2, direction: "none", random: true, straight: false, out_mode: "out" }
+            },
+            interactivity: {
+                detect_on: "canvas",
+                events: {
+                    onhover: { enable: true, mode: "grab" },
+                    onclick: { enable: true, mode: "push" }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

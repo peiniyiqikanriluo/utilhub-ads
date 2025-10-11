@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>常见问题 - 极简工具箱</title>
+    <meta name="description" content="极简工具箱常见问题解答，解决您在使用过程中可能遇到的问题。">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6366f1;
+            --secondary: #8b5cf6;
+            --bg: #f8fafc;
+            --text: #1e293b;
+            --card: #ffffff;
+            --hover: #e2e8f0;
+        }
+
+        .dark {
+            --primary: #818cf8;
+            --secondary: #a78bfa;
+            --bg: #0f172a;
+            --text: #f8fafc;
+            --card: #1e293b;
+            --hover: #334155;
+        }
+
+        body {
+            font-family: 'Noto Sans SC', sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            transition: all 0.3s ease;
+        }
+
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        .gradient-text {
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .content-container {
+            background-color: var(--card);
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+        }
+
+        .back-button {
+            background-color: var(--primary);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            display: inline-flex;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .back-button:hover {
+            background-color: var(--secondary);
+            transform: translateY(-2px);
+        }
+
+        .faq-item {
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .dark .faq-item {
+            border-bottom: 1px solid #334155;
+        }
+
+        .faq-question {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+        }
+
+        .faq-question:hover {
+            color: var(--primary);
+        }
+
+        .faq-icon {
+            margin-right: 0.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .faq-answer {
+            color: #6b7280;
+            margin-left: 1.5rem;
+        }
+
+        .dark .faq-answer {
+            color: #d1d5db;
+        }
+
+        .faq-expanded .faq-icon {
+            transform: rotate(90deg);
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+    <div id="particles-js" class="particles"></div>
+
+    <div class="container mx-auto px-4 py-8">
+        <header class="mb-8">
+            <div class="flex justify-between items-center">
+                <div>
+                    <a href="index.html" class="back-button">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clip-rule="evenodd" />
+                        </svg>
+                        返回首页
+                    </a>
+                </div>
+                <button id="theme-toggle" class="p-2 rounded-full bg-gray-200 dark:bg-gray-700">
+                    <span id="theme-icon">🌙</span>
+                </button>
+            </div>
+        </header>
+
+        <div class="content-container">
+            <h1 class="text-3xl font-bold gradient-text mb-6">常见问题</h1>
+            
+            <div class="space-y-6">
+                <section>
+                    <h2 class="text-xl font-semibold mb-4">使用相关问题</h2>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleFAQ(this)">
+                            <svg class="faq-icon w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                            </svg>
+                            如何收藏常用工具？
+                        </div>
+                        <div class="faq-answer hidden">
+                            <p>在工具卡片右上角点击星形图标即可收藏该工具。收藏的工具会显示在首页底部的"收藏的工具"区域，方便快速访问。</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleFAQ(this)">
+                            <svg class="faq-icon w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                            </svg>
+                            我的主题设置会保存吗？
+                        </div>
+                        <div class="faq-answer hidden">
+                            <p>是的，您的主题偏好（明暗模式）会自动保存在浏览器的本地存储中。下次访问网站时会自动应用您之前选择的主题。</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleFAQ(this)">
+                            <svg class="faq-icon w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                            </svg>
+                            工具使用次数是如何统计的？
+                        </div>
+                        <div class="faq-answer hidden">
+                            <p>每次您点击工具卡片进入工具页面时，使用次数会自动增加。这些数据仅存储在您的浏览器本地，不会上传到服务器。</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleFAQ(this)">
+                            <svg class="faq-icon w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                            </svg>
+                            如何清除所有本地数据？
+                        </div>
+                        <div class="faq-answer hidden">
+                            <p>您可以通过浏览器的设置清除网站数据，或者使用专门的清理工具。清除后，所有使用记录、收藏和主题设置都会被重置。</p>
+                        </div>
+                    </div>
+                </section>
+
+                <section>
+                    <h2 class="text-xl font-semibold mb-4">工具相关问题</h2>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleFAQ(this)">
+                            <svg class="faq-icon w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                            </svg>
+                            文件转换器支持哪些格式？
+                        </div>
+                        <div class="faq-answer hidden">
+                            <p>文件转换器支持多种常见格式转换，包括：</p>
+                            <ul class="list-disc pl-5 mt-2">
+                                <li>图像格式：JPG、PNG、GIF、WEBP等</li>
+                                <li>文档格式：PDF、DOC、DOCX、TXT等</li>
+                                <li>其他格式：根据具体工具而定</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleFAQ(this)">
+                            <svg class="faq-icon w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                            </svg>
+                            密码生成器生成的密码安全吗？
+                        </div>
+                        <div class="faq-answer hidden">
+                            <p>是的，密码生成器使用加密安全的随机数生成算法，确保生成的密码具有高随机性和安全性。建议生成的密码长度在12-16位，并包含多种字符类型。</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleFAQ(this)">
+                            <svg class="faq-icon w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                            </svg>
+                            JSON格式化工具如何处理无效的JSON？
+                        </div>
+                        <div class="faq-answer hidden">
+                            <p>如果输入的JSON格式不正确，JSON格式化工具会显示详细的错误信息，包括错误位置和类型，帮助您快速定位和修复问题。</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleFAQ(this)">
+                            <svg class="faq-icon w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                            </svg>
+                            二维码生成器支持多大的数据量？
+                        </div>
+                        <div class="faq-answer hidden">
+                            <p>二维码生成器支持生成包含最多约4000个字符的二维码。对于较长的文本，建议使用URL缩短服务或分割内容。</p>
+                        </div>
+                    </div>
+                </section>
+
+                <section>
+                    <h2 class="text-xl font-semibold mb-4">隐私与安全</h2>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleFAQ(this)">
+                            <svg class="faq-icon w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                            </svg>
+                            我的数据安全吗？
+                        </div>
+                        <div class="faq-answer hidden">
+                            <p>极简工具箱非常重视用户隐私和安全。大多数工具在浏览器本地运行，您的数据不会上传到服务器。我们建议在处理敏感信息时仍然保持谨慎。</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleFAQ(this)">
+                            <svg class="faq-icon w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                            </svg>
+                            网站会收集我的个人信息吗？
+                        </div>
+                        <div class="faq-answer hidden">
+                            <p>我们仅收集必要的使用数据（如工具使用次数）来改进用户体验，这些数据存储在您的浏览器本地。详细内容请查看我们的<a href="privacy_policy.html" class="text-primary hover:underline">隐私政策</a>。</p>
+                        </div>
+                    </div>
+                </section>
+
+                <section>
+                    <h2 class="text-xl font-semibold mb-4">更多帮助</h2>
+                    <p class="text-gray-600 dark:text-gray-300 mb-4">
+                        如果这里没有找到您需要的答案，请查看我们的<a href="help_document.html" class="text-primary hover:underline">帮助文档</a>或通过<a href="feedback.html" class="text-primary hover:underline">意见反馈</a>联系我们。
+                    </p>
+                </section>
+            </div>
+        </div>
+
+        <footer class="bg-white dark:bg-gray-800 rounded-xl shadow-md p-8 mt-12">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
+                <!-- 网站介绍 -->
+                <div>
+                    <h3 class="text-lg font-semibold mb-4 gradient-text">极简工具箱</h3>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm mb-4">
+                        提供简单高效的在线工具集合，满足您的日常需求。
+                    </p>
+                </div>
+
+                <!-- 工具导航 -->
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">工具导航</h3>
+                    <ul class="space-y-2">
+                        <li><a href="file_converter.html" class="text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary text-sm transition-colors">文件转换器</a></li>
+                        <li><a href="password_generator.html" class="text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary text-sm transition-colors">密码生成器</a></li>
+                        <li><a href="qr_generator.html" class="text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary text-sm transition-colors">二维码生成器</a></li>
+                        <li><a href="json_formatter.html" class="text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary text-sm transition-colors">JSON格式化</a></li>
+                        <li><a href="index.html" class="text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary text-sm transition-colors">查看全部工具</a></li>
+                    </ul>
+                </div>
+
+                <!-- 支持与帮助 -->
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">支持与帮助</h3>
+                    <ul class="space-y-2">
+                        <li><a href="help_document.html" class="text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary text-sm transition-colors">帮助文档</a></li>
+                        <li><a href="faq.html" class="text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary text-sm transition-colors">常见问题</a></li>
+                        <li><a href="feedback.html" class="text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary text-sm transition-colors">意见反馈</a></li>
+                    </ul>
+                </div>
+
+                <!-- 关于我们 -->
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">关于我们</h3>
+                    <ul class="space-y-2">
+                        <li><a href="about.html" class="text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary text-sm transition-colors">关于极简工具箱</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 底部版权和备案信息 -->
+            <div class="pt-8 border-t border-gray-200 dark:border-gray-700">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <div class="mb-4 md:mb-0 text-center md:text-left">
+                        <p class="text-gray-500 dark:text-gray-400 text-sm">© 2025 极简工具箱. 保留所有权利.</p>
+                    </div>
+                    <div class="flex flex-wrap justify-center gap-6 mb-4 md:mb-0">
+                        <a href="privacy_policy.html" class="text-gray-500 dark:text-gray-400 hover:text-primary dark:hover:text-primary text-sm transition-colors">隐私政策</a>
+                        <a href="terms_of_service.html" class="text-gray-500 dark:text-gray-400 hover:text-primary dark:hover:text-primary text-sm transition-colors">服务条款</a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
+    <script>
+        // FAQ切换功能
+        function toggleFAQ(element) {
+            const parent = element.parentElement;
+            const answer = parent.querySelector('.faq-answer');
+            
+            if (answer.classList.contains('hidden')) {
+                answer.classList.remove('hidden');
+                parent.classList.add('faq-expanded');
+            } else {
+                answer.classList.add('hidden');
+                parent.classList.remove('faq-expanded');
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            // 暗黑模式切换
+            const themeToggle = document.getElementById('theme-toggle');
+            const themeIcon = document.getElementById('theme-icon');
+
+            function applyTheme() {
+                if (localStorage.getItem('theme') === 'dark' ||
+                    (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                    document.documentElement.classList.add('dark');
+                    if (themeIcon) themeIcon.textContent = '☀️';
+                } else {
+                    document.documentElement.classList.remove('dark');
+                    if (themeIcon) themeIcon.textContent = '🌙';
+                }
+            }
+
+            if (themeToggle) {
+                themeToggle.addEventListener('click', function () {
+                    document.documentElement.classList.toggle('dark');
+                    localStorage.setItem('theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light');
+                    if (themeIcon) themeIcon.textContent = document.documentElement.classList.contains('dark') ? '☀️' : '🌙';
+                });
+            }
+
+            applyTheme();
+        });
+
+        // 粒子效果初始化
+        particlesJS('particles-js', {
+            particles: {
+                number: { value: 60, density: { enable: true, value_area: 800 } },
+                color: { value: "#6366f1" },
+                shape: { type: "circle" },
+                opacity: { value: 0.5, random: true },
+                size: { value: 3, random: true },
+                line_linked: { enable: true, distance: 150, color: "#8b5cf6", opacity: 0.4, width: 1 },
+                move: { enable: true, speed: 2, direction: "none", random: true, straight: false, out_mode: "out" }
+            },
+            interactivity: {
+                detect_on: "canvas",
+                events: {
+                    onhover: { enable: true, mode: "grab" },
+                    onclick: { enable: true, mode: "push" }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

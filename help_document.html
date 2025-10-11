@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>帮助文档 - 极简工具箱</title>
+    <meta name="description" content="极简工具箱使用帮助文档，包含各种工具的使用指南和技巧。">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6366f1;
+            --secondary: #8b5cf6;
+            --bg: #f8fafc;
+            --text: #1e293b;
+            --card: #ffffff;
+            --hover: #e2e8f0;
+        }
+
+        .dark {
+            --primary: #818cf8;
+            --secondary: #a78bfa;
+            --bg: #0f172a;
+            --text: #f8fafc;
+            --card: #1e293b;
+            --hover: #334155;
+        }
+
+        body {
+            font-family: 'Noto Sans SC', sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            transition: all 0.3s ease;
+        }
+
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        .gradient-text {
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .content-container {
+            background-color: var(--card);
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+        }
+
+        .back-button {
+            background-color: var(--primary);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            display: inline-flex;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .back-button:hover {
+            background-color: var(--secondary);
+            transform: translateY(-2px);
+        }
+
+        .help-section {
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .dark .help-section {
+            border-bottom: 1px solid #334155;
+        }
+
+        .help-item {
+            margin-bottom: 1.5rem;
+        }
+
+        .help-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+            margin-right: 1rem;
+        }
+
+        .step-number {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+            margin-right: 0.75rem;
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+    <div id="particles-js" class="particles"></div>
+
+    <div class="container mx-auto px-4 py-8">
+        <header class="mb-8">
+            <div class="flex justify-between items-center">
+                <div>
+                    <a href="index.html" class="back-button">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clip-rule="evenodd" />
+                        </svg>
+                        返回首页
+                    </a>
+                </div>
+                <button id="theme-toggle" class="p-2 rounded-full bg-gray-200 dark:bg-gray-700">
+                    <span id="theme-icon">🌙</span>
+                </button>
+            </div>
+        </header>
+
+        <div class="content-container">
+            <h1 class="text-3xl font-bold gradient-text mb-6">帮助文档</h1>
+            
+            <div class="space-y-8">
+                <section class="help-section">
+                    <h2 class="text-xl font-semibold mb-4">网站使用指南</h2>
+                    
+                    <div class="help-item">
+                        <h3 class="font-semibold mb-2 flex items-center">
+                            <div class="help-icon">🏠</div>
+                            <span>首页导航</span>
+                        </h3>
+                        <p class="text-gray-600 dark:text-gray-300 mb-2">
+                            首页展示了所有可用工具。您可以通过以下方式使用：
+                        </p>
+                        <div class="space-y-2 ml-12">
+                            <div class="flex items-start">
+                                <div class="step-number">1</div>
+                                <p class="text-gray-600 dark:text-gray-300">点击任何工具卡片即可进入该工具页面</p>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="step-number">2</div>
+                                <p class="text-gray-600 dark:text-gray-300">点击工具卡片右上角的星形图标可以收藏该工具</p>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="step-number">3</div>
+                                <p class="text-gray-600 dark:text-gray-300">收藏的工具会显示在首页底部的"收藏的工具"区域</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="help-item">
+                        <h3 class="font-semibold mb-2 flex items-center">
+                            <div class="help-icon">🌙</div>
+                            <span>主题切换</span>
+                        </h3>
+                        <p class="text-gray-600 dark:text-gray-300">
+                            点击页面右上角的主题切换按钮可以在明暗主题之间切换。您的主题偏好会自动保存。
+                        </p>
+                    </div>
+
+                    <div class="help-item">
+                        <h3 class="font-semibold mb-2 flex items-center">
+                            <div class="help-icon">⭐</div>
+                            <span>收藏功能</span>
+                        </h3>
+                        <p class="text-gray-600 dark:text-gray-300">
+                            收藏功能可以帮助您快速访问常用工具。收藏的工具会显示在首页底部，方便快速访问。
+                        </p>
+                    </div>
+                </section>
+
+                <section class="help-section">
+                    <h2 class="text-xl font-semibold mb-4">工具使用说明</h2>
+                    
+                    <div class="help-item">
+                        <h3 class="font-semibold mb-2">文件转换器</h3>
+                        <p class="text-gray-600 dark:text-gray-300 mb-2">
+                            支持多种文件格式之间的转换，包括图像、文档等格式。
+                        </p>
+                        <ul class="list-disc pl-5 text-gray-600 dark:text-gray-300 space-y-1">
+                            <li>点击"选择文件"按钮上传需要转换的文件</li>
+                            <li>选择目标格式</li>
+                            <li>点击"转换"按钮开始转换</li>
+                            <li>转换完成后下载转换后的文件</li>
+                        </ul>
+                    </div>
+
+                    <div class="help-item">
+                        <h3 class="font-semibold mb-2">密码生成器</h3>
+                        <p class="text-gray-600 dark:text-gray-300 mb-2">
+                            生成高强度的随机密码，提高账户安全性。
+                        </p>
+                        <ul class="list-disc pl-5 text-gray-600 dark:text-gray-300 space-y-1">
+                            <li>设置密码长度（推荐12-16位）</li>
+                            <li>选择包含的字符类型（大写字母、小写字母、数字、符号）</li>
+                            <li>点击"生成密码"按钮</li>
+                            <li>复制生成的密码到剪贴板</li>
+                        </ul>
+                    </div>
+
+                    <div class="help-item">
+                        <h3 class="font-semibold mb-2">JSON格式化</h3>
+                        <p class="text-gray-600 dark:text-gray-300 mb-2">
+                            美化和验证JSON数据，使其更易读。
+                        </p>
+                        <ul class="list-disc pl-5 text-gray-600 dark:text-gray-300 space-y-1">
+                            <li>粘贴或输入JSON数据</li>
+                            <li>点击"格式化"按钮</li>
+                            <li>格式化后的JSON会以树状结构显示</li>
+                            <li>如果JSON格式错误，会显示错误信息</li>
+                        </ul>
+                    </div>
+
+                    <div class="help-item">
+                        <h3 class="font-semibold mb-2">二维码生成器</h3>
+                        <p class="text-gray-600 dark:text-gray-300 mb-2">
+                            将文本、URL等信息转换为二维码图像。
+                        </p>
+                        <ul class="list-disc pl-5 text-gray-600 dark:text-gray-300 space-y-1">
+                            <li>输入要转换为二维码的文本或URL</li>
+                            <li>选择二维码尺寸和颜色（可选）</li>
+                            <li>点击"生成"按钮</li>
+                            <li>右键点击生成的二维码可以保存图像</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <section>
+                    <h2 class="text-xl font-semibold mb-4">常见问题</h2>
+                    <p class="text-gray-600 dark:text-gray-300 mb-4">
+                        如果您在使用过程中遇到问题，请查看我们的<a href="faq.html" class="text-primary hover:underline">常见问题页面</a>获取更多帮助。
+                    </p>
+                </section>
+
+                <section>
+                    <h2 class="text-xl font-semibold mb-4">联系我们</h2>
+                    <p class="text-gray-600 dark:text-gray-300 mb-4">
+                        如果帮助文档无法解决您的问题，欢迎通过<a href="feedback.html" class="text-primary hover:underline">意见反馈</a>联系我们。
+                    </p>
+                </section>
+            </div>
+        </div>
+
+        <footer class="bg-white dark:bg-gray-800 rounded-xl shadow-md p-8 mt-12">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
+                <!-- 网站介绍 -->
+                <div>
+                    <h3 class="text-lg font-semibold mb-4 gradient-text">极简工具箱</h3>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm mb-4">
+                        提供简单高效的在线工具集合，满足您的日常需求。
+                    </p>
+                </div>
+
+                <!-- 工具导航 -->
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">工具导航</h3>
+                    <ul class="space-y-2">
+                        <li><a href="file_converter.html" class="text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary text-sm transition-colors">文件转换器</a></li>
+                        <li><a href="password_generator.html" class="text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary text-sm transition-colors">密码生成器</a></li>
+                        <li><a href="qr_generator.html" class="text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary text-sm transition-colors">二维码生成器</a></li>
+                        <li><a href="json_formatter.html" class="text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary text-sm transition-colors">JSON格式化</a></li>
+                        <li><a href="index.html" class="text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary text-sm transition-colors">查看全部工具</a></li>
+                    </ul>
+                </div>
+
+                <!-- 支持与帮助 -->
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">支持与帮助</h3>
+                    <ul class="space-y-2">
+                        <li><a href="help_document.html" class="text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary text-sm transition-colors">帮助文档</a></li>
+                        <li><a href="faq.html" class="text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary text-sm transition-colors">常见问题</a></li>
+                        <li><a href="feedback.html" class="text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary text-sm transition-colors">意见反馈</a></li>
+                    </ul>
+                </div>
+
+                <!-- 关于我们 -->
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">关于我们</h3>
+                    <ul class="space-y-2">
+                        <li><a href="about.html" class="text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary text-sm transition-colors">关于极简工具箱</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 底部版权和备案信息 -->
+            <div class="pt-8 border-t border-gray-200 dark:border-gray-700">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <div class="mb-4 md:mb-0 text-center md:text-left">
+                        <p class="text-gray-500 dark:text-gray-400 text-sm">© 2025 极简工具箱. 保留所有权利.</p>
+                    </div>
+                    <div class="flex flex-wrap justify-center gap-6 mb-4 md:mb-0">
+                        <a href="privacy_policy.html" class="text-gray-500 dark:text-gray-400 hover:text-primary dark:hover:text-primary text-sm transition-colors">隐私政策</a>
+                        <a href="terms_of_service.html" class="text-gray-500 dark:text-gray-400 hover:text-primary dark:hover:text-primary text-sm transition-colors">服务条款</a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // 暗黑模式切换
+            const themeToggle = document.getElementById('theme-toggle');
+            const themeIcon = document.getElementById('theme-icon');
+
+            function applyTheme() {
+                if (localStorage.getItem('theme') === 'dark' ||
+                    (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                    document.documentElement.classList.add('dark');
+                    if (themeIcon) themeIcon.textContent = '☀️';
+                } else {
+                    document.documentElement.classList.remove('dark');
+                    if (themeIcon) themeIcon.textContent = '🌙';
+                }
+            }
+
+            if (themeToggle) {
+                themeToggle.addEventListener('click', function () {
+                    document.documentElement.classList.toggle('dark');
+                    localStorage.setItem('theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light');
+                    if (themeIcon) themeIcon.textContent = document.documentElement.classList.contains('dark') ? '☀️' : '🌙';
+                });
+            }
+
+            applyTheme();
+        });
+
+        // 粒子效果初始化
+        particlesJS('particles-js', {
+            particles: {
+                number: { value: 60, density: { enable: true, value_area: 800 } },
+                color: { value: "#6366f1" },
+                shape: { type: "circle" },
+                opacity: { value: 0.5, random: true },
+                size: { value: 3, random: true },
+                line_linked: { enable: true, distance: 150, color: "#8b5cf6", opacity: 0.4, width: 1 },
+                move: { enable: true, speed: 2, direction: "none", random: true, straight: false, out_mode: "out" }
+            },
+            interactivity: {
+                detect_on: "canvas",
+                events: {
+                    onhover: { enable: true, mode: "grab" },
+                    onclick: { enable: true, mode: "push" }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

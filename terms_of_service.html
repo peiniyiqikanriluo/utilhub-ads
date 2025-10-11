@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>服务条款 - 极简工具箱</title>
+    <meta name="description" content="极简工具箱服务条款，详细说明使用本网站的条件和规则。">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6366f1;
+            --secondary: #8b5cf6;
+            --bg: #f8fafc;
+            --text: #1e293b;
+            --card: #ffffff;
+            --hover: #e2e8f0;
+        }
+
+        .dark {
+            --primary: #818cf8;
+            --secondary: #a78bfa;
+            --bg: #0f172a;
+            --text: #f8fafc;
+            --card: #1e293b;
+            --hover: #334155;
+        }
+
+        body {
+            font-family: 'Noto Sans SC', sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            transition: all 0.3s ease;
+        }
+
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        .gradient-text {
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .content-container {
+            background-color: var(--card);
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+        }
+
+        .back-button {
+            background-color: var(--primary);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            display: inline-flex;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .back-button:hover {
+            background-color: var(--secondary);
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+    <div id="particles-js" class="particles"></div>
+
+    <div class="container mx-auto px-4 py-8">
+        <header class="mb-8">
+            <div class="flex justify-between items-center">
+                <div>
+                    <a href="index.html" class="back-button">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clip-rule="evenodd" />
+                        </svg>
+                        返回首页
+                    </a>
+                </div>
+                <button id="theme-toggle" class="p-2 rounded-full bg-gray-200 dark:bg-gray-700">
+                    <span id="theme-icon">🌙</span>
+                </button>
+            </div>
+        </header>
+
+        <div class="content-container">
+            <h1 class="text-3xl font-bold gradient-text mb-6">服务条款</h1>
+            <p class="text-gray-600 dark:text-gray-300 mb-6">最后更新日期：2025年10月11日</p>
+            
+            <div class="space-y-6">
+                <section>
+                    <h2 class="text-xl font-semibold mb-3">接受条款</h2>
+                    <p class="text-gray-600 dark:text-gray-300 mb-4">
+                        通过访问和使用极简工具箱网站（以下简称"本网站"），您同意遵守本服务条款以及所有适用的法律和法规。如果您不同意这些条款，请不要使用本网站。
+                    </p>
+                </section>
+
+                <section>
+                    <h2 class="text-xl font-semibold mb-3">服务说明</h2>
+                    <p class="text-gray-600 dark:text-gray-300 mb-4">
+                        极简工具箱提供多种在线工具，包括但不限于文件转换、密码生成、IP查询、二维码生成等功能。这些工具旨在为用户提供便利，但不对结果的准确性、完整性或及时性作任何保证。
+                    </p>
+                </section>
+
+                <section>
+                    <h2 class="text-xl font-semibold mb-3">使用限制</h2>
+                    <p class="text-gray-600 dark:text-gray-300 mb-4">
+                        您同意不以任何非法或禁止的方式使用本网站，包括但不限于：
+                    </p>
+                    <ul class="list-disc pl-5 text-gray-600 dark:text-gray-300 space-y-2">
+                        <li>干扰或破坏网站的安全性或正常运行</li>
+                        <li>尝试未经授权访问任何部分 of 网站、其他账户或计算机系统</li>
+                        <li>使用自动化系统（如机器人、爬虫等）过度访问网站</li>
+                        <li>上传或传输任何恶意软件或有害代码</li>
+                        <li>利用网站工具进行任何非法活动</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h2 class="text-xl font-semibold mb-3">知识产权</h2>
+                    <p class="text-gray-600 dark:text-gray-300 mb-4">
+                        本网站及其所有内容，包括但不限于文本、图形、徽标、按钮图标、图像、音频剪辑、数字下载、数据编译和软件，均为极简工具箱或其内容提供商的财产，受国际版权法和相关法律的保护。
+                    </p>
+                </section>
+
+                <section>
+                    <h2 class="text-xl font-semibold mb-3">免责声明</h2>
+                    <p class="text-gray-600 dark:text-gray-300 mb-4">
+                        本网站及其所有工具均按"原样"提供，不作任何明示或暗示的保证。对于因使用或无法使用本网站而导致的任何损害，极简工具箱不承担任何责任。
+                    </p>
+                    <p class="text-gray-600 dark:text-gray-300 mb-4">
+                        对于使用本网站工具处理敏感信息（如密码、个人数据等），用户应自行承担风险。我们建议在处理敏感信息时采取适当的预防措施。
+                    </p>
+                </section>
+
+                <section>
+                    <h2 class="text-xl font-semibold mb-3">服务变更</h2>
+                    <p class="text-gray-600 dark:text-gray-300 mb-4">
+                        我们保留随时修改、暂停或终止任何工具或整个网站服务的权利，无需提前通知。对于此类修改、暂停或终止，我们不承担任何责任。
+                    </p>
+                </section>
+
+                <section>
+                    <h2 class="text-xl font-semibold mb-3">第三方链接</h2>
+                    <p class="text-gray-600 dark:text-gray-300 mb-4">
+                        本网站可能包含指向第三方网站的链接。这些链接仅为方便用户提供，我们不对这些网站的内容、隐私政策或做法负责。
+                    </p>
+                </section>
+
+                <section>
+                    <h2 class="text-xl font-semibold mb-3">条款修改</h2>
+                    <p class="text-gray-600 dark:text-gray-300 mb-4">
+                        我们保留随时更新这些服务条款的权利。更新后的条款将在网站上发布，并更新"最后更新日期"。继续使用本网站即表示您接受更新后的条款。
+                    </p>
+                </section>
+
+                <section>
+                    <h2 class="text-xl font-semibold mb-3">管辖法律</h2>
+                    <p class="text-gray-600 dark:text-gray-300">
+                        本服务条款受中华人民共和国法律管辖并据其解释。任何因本条款引起的争议应提交有管辖权的法院解决。
+                    </p>
+                </section>
+            </div>
+        </div>
+
+        <footer class="bg-white dark:bg-gray-800 rounded-xl shadow-md p-8 mt-12">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
+                <!-- 网站介绍 -->
+                <div>
+                    <h3 class="text-lg font-semibold mb-4 gradient-text">极简工具箱</h3>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm mb-4">
+                        提供简单高效的在线工具集合，满足您的日常需求。
+                    </p>
+                </div>
+
+                <!-- 工具导航 -->
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">工具导航</h3>
+                    <ul class="space-y-2">
+                        <li><a href="file_converter.html" class="text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary text-sm transition-colors">文件转换器</a></li>
+                        <li><a href="password_generator.html" class="text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary text-sm transition-colors">密码生成器</a></li>
+                        <li><a href="qr_generator.html" class="text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary text-sm transition-colors">二维码生成器</a></li>
+                        <li><a href="json_formatter.html" class="text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary text-sm transition-colors">JSON格式化</a></li>
+                        <li><a href="index.html" class="text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary text-sm transition-colors">查看全部工具</a></li>
+                    </ul>
+                </div>
+
+                <!-- 支持与帮助 -->
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">支持与帮助</h3>
+                    <ul class="space-y-2">
+                        <li><a href="help_document.html" class="text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary text-sm transition-colors">帮助文档</a></li>
+                        <li><a href="faq.html" class="text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary text-sm transition-colors">常见问题</a></li>
+                        <li><a href="feedback.html" class="text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary text-sm transition-colors">意见反馈</a></li>
+                    </ul>
+                </div>
+
+                <!-- 关于我们 -->
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">关于我们</h3>
+                    <ul class="space-y-2">
+                        <li><a href="about.html" class="text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary text-sm transition-colors">关于极简工具箱</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 底部版权和备案信息 -->
+            <div class="pt-8 border-t border-gray-200 dark:border-gray-700">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <div class="mb-4 md:mb-0 text-center md:text-left">
+                        <p class="text-gray-500 dark:text-gray-400 text-sm">© 2025 极简工具箱. 保留所有权利.</p>
+                    </div>
+                    <div class="flex flex-wrap justify-center gap-6 mb-4 md:mb-0">
+                        <a href="privacy_policy.html" class="text-gray-500 dark:text-gray-400 hover:text-primary dark:hover:text-primary text-sm transition-colors">隐私政策</a>
+                        <a href="terms_of_service.html" class="text-gray-500 dark:text-gray-400 hover:text-primary dark:hover:text-primary text-sm transition-colors">服务条款</a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // 暗黑模式切换
+            const themeToggle = document.getElementById('theme-toggle');
+            const themeIcon = document.getElementById('theme-icon');
+
+            function applyTheme() {
+                if (localStorage.getItem('theme') === 'dark' ||
+                    (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                    document.documentElement.classList.add('dark');
+                    if (themeIcon) themeIcon.textContent = '☀️';
+                } else {
+                    document.documentElement.classList.remove('dark');
+                    if (themeIcon) themeIcon.textContent = '🌙';
+                }
+            }
+
+            if (themeToggle) {
+                themeToggle.addEventListener('click', function () {
+                    document.documentElement.classList.toggle('dark');
+                    localStorage.setItem('theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light');
+                    if (themeIcon) themeIcon.textContent = document.documentElement.classList.contains('dark') ? '☀️' : '🌙';
+                });
+            }
+
+            applyTheme();
+        });
+
+        // 粒子效果初始化
+        particlesJS('particles-js', {
+            particles: {
+                number: { value: 60, density: { enable: true, value_area: 800 } },
+                color: { value: "#6366f1" },
+                shape: { type: "circle" },
+                opacity: { value: 0.5, random: true },
+                size: { value: 3, random: true },
+                line_linked: { enable: true, distance: 150, color: "#8b5cf6", opacity: 0.4, width: 1 },
+                move: { enable: true, speed: 2, direction: "none", random: true, straight: false, out_mode: "out" }
+            },
+            interactivity: {
+                detect_on: "canvas",
+                events: {
+                    onhover: { enable: true, mode: "grab" },
+                    onclick: { enable: true, mode: "push" }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
