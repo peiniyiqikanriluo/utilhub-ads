@@ -1,6 +1,7 @@
 <!-- minimalist_toolbox/frontend/url_encoder.html -->
 <!DOCTYPE html>
 <html lang="zh-CN">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -8,11 +9,11 @@
     <meta name="description" content="免费的URL编码解码在线工具，快速将URL进行编码或解码，支持中文和特殊字符的URL编码转换。">
     <meta name="keywords" content="URL编码,URL解码,百分比编码,URL转码,在线工具">
     <meta name="author" content="极简工具箱">
-    
+
     <!-- 结构化数据 -->
     <script type="application/ld+json">
     {
-      "@context": "https://schema.org",
+      "@context": "https://utilhub.top",
       "@type": "WebApplication",
       "name": "URL编码/解码工具 - 极简工具箱",
       "description": "免费的URL编码解码在线工具，快速将URL进行编码或解码",
@@ -25,24 +26,27 @@
       }
     }
     </script>
-    
+
     <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
     <link href="https://fonts.loli.net/css?family=Noto+Sans+SC:400,500,700&display=swap" rel="stylesheet">
     <link href="../css/style.css" rel="stylesheet">
     <link href="../css/tools.css" rel="stylesheet">
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6400988749068679"
-     crossorigin="anonymous"></script>
+    <script src="https://cmp.gatekeeperconsent.com/min.js" data-cfasync="false"></script>
+    <script src="https://the.gatekeeperconsent.com/cmp.min.js" data-cfasync="false"></script>
     <style>
         .code-area {
             font-family: monospace;
         }
+
         .tab-button.active {
             background-color: var(--primary);
             color: white;
         }
+
         .copy-btn:hover {
             transform: scale(1.1);
         }
+
         .example-btn {
             margin-top: 10px;
             padding: 6px 12px;
@@ -51,15 +55,17 @@
             font-size: 0.9rem;
             cursor: pointer;
         }
+
         .dark-mode .example-btn {
             background-color: #4b5563;
             color: #e5e7eb;
         }
     </style>
 </head>
+
 <body class="min-h-screen bg-gray-50 dark:bg-gray-900">
     <div id="particles-js" class="particles"></div>
-    
+
     <div class="container mx-auto px-4 py-8">
         <header class="mb-8">
             <div class="flex justify-between items-center">
@@ -67,7 +73,8 @@
                     <h1 class="text-3xl font-bold gradient-text">URL编码/解码工具</h1>
                     <p class="text-gray-600 dark:text-gray-300 mt-2">在线URL编码转换工具，支持UTF-8编码格式</p>
                 </div>
-                <a href="../index.html" class="px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition">返回首页</a>
+                <a href="../index.html"
+                    class="px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition">返回首页</a>
             </div>
         </header>
 
@@ -80,21 +87,27 @@
             <div id="encode" class="tab-content">
                 <div class="mb-6">
                     <label class="block text-sm font-medium mb-2">输入文本</label>
-                    <textarea id="encode-input" class="w-full bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg px-4 py-3 h-40" placeholder="输入要编码的URL或文本"></textarea>
+                    <textarea id="encode-input"
+                        class="w-full bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg px-4 py-3 h-40"
+                        placeholder="输入要编码的URL或文本"></textarea>
                     <button class="example-btn" data-example="encode">填充示例</button>
                 </div>
                 <div class="mb-6">
-                    <button id="encode-btn" class="w-full py-3 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition flex items-center justify-center">
+                    <button id="encode-btn"
+                        class="w-full py-3 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition flex items-center justify-center">
                         <span class="text-xl mr-2">🔗</span>
                         编码URL
                     </button>
                 </div>
                 <div class="mb-6">
                     <label class="block text-sm font-medium mb-2">编码结果</label>
-                    <textarea id="encode-output" class="w-full bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg px-4 py-3 h-40 code-area" placeholder="编码结果" readonly></textarea>
+                    <textarea id="encode-output"
+                        class="w-full bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg px-4 py-3 h-40 code-area"
+                        placeholder="编码结果" readonly></textarea>
                 </div>
                 <div>
-                    <button id="copy-encode-btn" class="px-4 py-2 bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 transition flex items-center">
+                    <button id="copy-encode-btn"
+                        class="px-4 py-2 bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 transition flex items-center">
                         <span class="text-xl mr-2">📋</span>
                         复制结果
                     </button>
@@ -104,21 +117,27 @@
             <div id="decode" class="tab-content hidden">
                 <div class="mb-6">
                     <label class="block text-sm font-medium mb-2">输入编码URL</label>
-                    <textarea id="decode-input" class="w-full bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg px-4 py-3 h-40 code-area" placeholder="输入要解码的URL编码"></textarea>
+                    <textarea id="decode-input"
+                        class="w-full bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg px-4 py-3 h-40 code-area"
+                        placeholder="输入要解码的URL编码"></textarea>
                     <button class="example-btn" data-example="decode">填充示例</button>
                 </div>
                 <div class="mb-6">
-                    <button id="decode-btn" class="w-full py-3 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition flex items-center justify-center">
+                    <button id="decode-btn"
+                        class="w-full py-3 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition flex items-center justify-center">
                         <span class="text-xl mr-2">🔤</span>
                         解码URL
                     </button>
                 </div>
                 <div class="mb-6">
                     <label class="block text-sm font-medium mb-2">解码结果</label>
-                    <textarea id="decode-output" class="w-full bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg px-4 py-3 h-40" placeholder="解码结果" readonly></textarea>
+                    <textarea id="decode-output"
+                        class="w-full bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg px-4 py-3 h-40"
+                        placeholder="解码结果" readonly></textarea>
                 </div>
                 <div>
-                    <button id="copy-decode-btn" class="px-4 py-2 bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 transition flex items-center">
+                    <button id="copy-decode-btn"
+                        class="px-4 py-2 bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 transition flex items-center">
                         <span class="text-xl mr-2">📋</span>
                         复制结果
                     </button>
@@ -146,60 +165,80 @@
             </div>
         </div>
     </div>
-        <footer class="bg-white dark:bg-gray-800 rounded-xl shadow-md p-8 mt-12">
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
-                <!-- 网站介绍 -->
-                <div>
-                    <h3 class="text-lg font-semibold mb-4 gradient-text">极简工具箱</h3>
-                    <p class="text-gray-600 dark:text-gray-300 text-sm mb-4">
-                        提供简单高效的在线工具集合，满足您的日常需求。
-                    </p>
-                </div>
-
-                <!-- 工具导航 -->
-                <div>
-                    <h3 class="text-lg font-semibold mb-4">工具导航</h3>
-                    <ul class="space-y-2">
-                        <li><a href="file_converter.html" class="text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary text-sm transition-colors">文件转换器</a></li>
-                        <li><a href="password_generator.html" class="text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary text-sm transition-colors">密码生成器</a></li>
-                        <li><a href="qr_generator.html" class="text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary text-sm transition-colors">二维码生成器</a></li>
-                        <li><a href="json_formatter.html" class="text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary text-sm transition-colors">JSON格式化</a></li>
-                        <li><a href="index.html" class="text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary text-sm transition-colors">查看全部工具</a></li>
-                    </ul>
-                </div>
-
-                <!-- 支持与帮助 -->
-                <div>
-                    <h3 class="text-lg font-semibold mb-4">支持与帮助</h3>
-                    <ul class="space-y-2">
-                        <li><a href="help_document.html" class="text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary text-sm transition-colors">帮助文档</a></li>
-                        <li><a href="faq.html" class="text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary text-sm transition-colors">常见问题</a></li>
-                        <li><a href="feedback.html" class="text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary text-sm transition-colors">意见反馈</a></li>
-                    </ul>
-                </div>
-
-                <!-- 关于我们 -->
-                <div>
-                    <h3 class="text-lg font-semibold mb-4">关于我们</h3>
-                    <ul class="space-y-2">
-                        <li><a href="about.html" class="text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary text-sm transition-colors">关于极简工具箱</a></li>
-                    </ul>
-                </div>
+    <footer class="bg-white dark:bg-gray-800 rounded-xl shadow-md p-8 mt-12">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
+            <!-- 网站介绍 -->
+            <div>
+                <h3 class="text-lg font-semibold mb-4 gradient-text">极简工具箱</h3>
+                <p class="text-gray-600 dark:text-gray-300 text-sm mb-4">
+                    提供简单高效的在线工具集合，满足您的日常需求。
+                </p>
             </div>
 
-            <!-- 底部版权和备案信息 -->
-            <div class="pt-8 border-t border-gray-200 dark:border-gray-700">
-                <div class="flex flex-col md:flex-row justify-between items-center">
-                    <div class="mb-4 md:mb-0 text-center md:text-left">
-                        <p class="text-gray-500 dark:text-gray-400 text-sm">© 2025 极简工具箱. 保留所有权利.</p>
-                    </div>
-                    <div class="flex flex-wrap justify-center gap-6 mb-4 md:mb-0">
-                        <a href="privacy_policy.html" class="text-gray-500 dark:text-gray-400 hover:text-primary dark:hover:text-primary text-sm transition-colors">隐私政策</a>
-                        <a href="terms_of_service.html" class="text-gray-500 dark:text-gray-400 hover:text-primary dark:hover:text-primary text-sm transition-colors">服务条款</a>
-                    </div>
+            <!-- 工具导航 -->
+            <div>
+                <h3 class="text-lg font-semibold mb-4">工具导航</h3>
+                <ul class="space-y-2">
+                    <li><a href="file_converter.html"
+                            class="text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary text-sm transition-colors">文件转换器</a>
+                    </li>
+                    <li><a href="password_generator.html"
+                            class="text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary text-sm transition-colors">密码生成器</a>
+                    </li>
+                    <li><a href="qr_generator.html"
+                            class="text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary text-sm transition-colors">二维码生成器</a>
+                    </li>
+                    <li><a href="json_formatter.html"
+                            class="text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary text-sm transition-colors">JSON格式化</a>
+                    </li>
+                    <li><a href="index.html"
+                            class="text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary text-sm transition-colors">查看全部工具</a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- 支持与帮助 -->
+            <div>
+                <h3 class="text-lg font-semibold mb-4">支持与帮助</h3>
+                <ul class="space-y-2">
+                    <li><a href="help_document.html"
+                            class="text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary text-sm transition-colors">帮助文档</a>
+                    </li>
+                    <li><a href="faq.html"
+                            class="text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary text-sm transition-colors">常见问题</a>
+                    </li>
+                    <li><a href="feedback.html"
+                            class="text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary text-sm transition-colors">意见反馈</a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- 关于我们 -->
+            <div>
+                <h3 class="text-lg font-semibold mb-4">关于我们</h3>
+                <ul class="space-y-2">
+                    <li><a href="about.html"
+                            class="text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary text-sm transition-colors">关于极简工具箱</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 底部版权和备案信息 -->
+        <div class="pt-8 border-t border-gray-200 dark:border-gray-700">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0 text-center md:text-left">
+                    <p class="text-gray-500 dark:text-gray-400 text-sm">© 2025 极简工具箱. 保留所有权利.</p>
+                </div>
+                <div class="flex flex-wrap justify-center gap-6 mb-4 md:mb-0">
+                    <a href="privacy_policy.html"
+                        class="text-gray-500 dark:text-gray-400 hover:text-primary dark:hover:text-primary text-sm transition-colors">隐私政策</a>
+                    <a href="terms_of_service.html"
+                        class="text-gray-500 dark:text-gray-400 hover:text-primary dark:hover:text-primary text-sm transition-colors">服务条款</a>
                 </div>
             </div>
-        </footer>
+        </div>
+    </footer>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
     <script>
         // 粒子效果
@@ -223,7 +262,7 @@
         });
 
         // 暗黑模式切换
-        if (localStorage.getItem('theme') === 'dark' || 
+        if (localStorage.getItem('theme') === 'dark' ||
             (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
             document.documentElement.classList.add('dark');
         }
@@ -233,7 +272,7 @@
             button.addEventListener('click', () => {
                 document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
                 button.classList.add('active');
-                
+
                 const tabId = button.getAttribute('data-tab');
                 document.querySelectorAll('.tab-content').forEach(content => {
                     content.classList.add('hidden');
@@ -249,7 +288,7 @@
                 alert('请输入要编码的文本');
                 return;
             }
-            
+
             try {
                 const encoded = encodeURIComponent(text)
                     .replace(/'/g, "%27")
@@ -258,7 +297,7 @@
                     .replace(/\)/g, "%29")
                     .replace(/\*/g, "%2A")
                     .replace(/!/g, "%21");
-                
+
                 document.getElementById('encode-output').value = encoded;
             } catch (e) {
                 document.getElementById('encode-output').value = '编码失败: ' + e.message;
@@ -272,11 +311,11 @@
                 alert('请输入要解码的URL编码');
                 return;
             }
-            
+
             try {
                 // 处理+号（表单编码风格）
                 const encodedText = encoded.replace(/\+/g, '%20');
-                
+
                 // 解码
                 const decoded = decodeURIComponent(encodedText);
                 document.getElementById('decode-output').value = decoded;
@@ -292,7 +331,7 @@
                 alert('没有内容可复制');
                 return;
             }
-            
+
             output.select();
             document.execCommand('copy');
             showCopyFeedback(document.getElementById('copy-encode-btn'));
@@ -304,7 +343,7 @@
                 alert('没有内容可复制');
                 return;
             }
-            
+
             output.select();
             document.execCommand('copy');
             showCopyFeedback(document.getElementById('copy-decode-btn'));
@@ -314,18 +353,18 @@
             const originalText = button.innerHTML;
             button.innerHTML = '<span class="text-xl mr-2">✅</span>已复制';
             button.disabled = true;
-            
+
             setTimeout(() => {
                 button.innerHTML = originalText;
                 button.disabled = false;
             }, 2000);
         }
-        
+
         // 示例功能
         document.querySelectorAll('.example-btn').forEach(button => {
             button.addEventListener('click', () => {
                 const type = button.getAttribute('data-example');
-                
+
                 if (type === 'encode') {
                     document.getElementById('encode-input').value = 'https://example.com/测试页面?name=张三&age=30';
                     document.getElementById('encode-output').value = '';
@@ -335,7 +374,7 @@
                 }
             });
         });
-        
+
         // 添加键盘快捷键支持
         document.addEventListener('keydown', (e) => {
             // Ctrl+Enter 进行编码/解码
@@ -349,4 +388,5 @@
         });
     </script>
 </body>
+
 </html>

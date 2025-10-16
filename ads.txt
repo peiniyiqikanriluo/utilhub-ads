@@ -1,1 +1,2 @@
-google.com, pub-6400988749068679, DIRECT, f08c47fec0942fa0
+# managed by Ads.txt Manager
+# placeholder, will be auto-updated by GitHub Action
