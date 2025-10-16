@@ -1,12 +1,15 @@
 name: Update ads.txt daily
 
+permissions:
+  contents: write  # 允许 Actions 推送到仓库
+
 on:
   push:
     paths:
-      - ".github/workflows/update-ads-txt.yml"  # 第一次推送后立即执行
+      - ".github/workflows/update-ads-txt.yml"  # 上传或修改时自动运行
   schedule:
     - cron: "0 3 * * *"  # 每天凌晨3点自动运行
-  workflow_dispatch:      # 允许手动触发（可在Actions页面手动点击运行）
+  workflow_dispatch:      # 可手动触发
 
 jobs:
   update-ads-txt:
